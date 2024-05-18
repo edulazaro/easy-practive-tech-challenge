@@ -31,6 +31,6 @@ class Client extends Model
 
     public function getUrlAttribute()
     {
-        return "/clients/" . $this->id;
+        return '/clients/'.$this->id;
     }
 }

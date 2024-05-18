@@ -31,7 +31,6 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
      * @return void
      *
      * @throws \Throwable
@@ -45,7 +44,6 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Throwable
@@ -61,7 +59,7 @@ class Handler extends ExceptionHandler
                     'status' => 404,
                 ], 404);
 
-            } else if ($exception instanceof AuthorizationException) {
+            } elseif ($exception instanceof AuthorizationException) {
                 $status = $exception->getCode() == 0 ? 403 : $exception->getCode();
             } else {
                 $status = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-
 use App\Models\Client;
+use Illuminate\Support\Facades\Gate;
 
 class ClientBookingsDataController extends Controller
 {

@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Data;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-
-use App\Rules\PhoneRule;
-use App\Rules\EmailWithTLDRule;
-
 use App\Models\Client;
+use App\Rules\EmailWithTLDRule;
+use App\Rules\PhoneRule;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientsDataController extends Controller
 {
-
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -37,7 +34,7 @@ class ClientsDataController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'The client was successfully created.',
-            'data' => $client
+            'data' => $client,
         ], 200);
     }
 

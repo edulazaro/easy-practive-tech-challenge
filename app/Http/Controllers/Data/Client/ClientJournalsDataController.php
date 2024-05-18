@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-
 use App\Models\Client;
 use App\Models\Journal;
+use Illuminate\Support\Facades\Gate;
 
 class ClientJournalsDataController extends Controller
 {

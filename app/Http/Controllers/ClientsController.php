@@ -29,7 +29,7 @@ class ClientsController extends Controller
             },
             'journals' => function ($query) {
                 $query->orderBy('date', 'ASC');
-            }
+            },
         ]);
 
         return view('clients.show', ['client' => $client]);
