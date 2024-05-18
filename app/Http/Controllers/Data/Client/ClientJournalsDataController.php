@@ -33,6 +33,6 @@ class ClientJournalsDataController extends Controller
         $journal->content = request()->get('content');
         $journal->save();
 
-        return response()->json($journal);
+        return response()->json($journal, 201);
     }
 }

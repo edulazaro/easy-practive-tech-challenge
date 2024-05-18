@@ -37,8 +37,10 @@ Route::group(['middleware' => ['auth', 'json'], 'prefix' => 'data'], function ()
 
     Route::get('/clients/{client}/bookings', 'Data\Client\ClientBookingsDataController@index')
         ->name('data.clients.bookings.index');
+  
     Route::get('/clients/{client}/journals', 'Data\Client\ClientJournalsDataController@index')
         ->name('data.clients.journals.index');
+ 
     Route::post('/clients/{client}/journals', 'Data\Client\ClientJournalsDataController@store')
         ->name('data.clients.journals.store');
 
