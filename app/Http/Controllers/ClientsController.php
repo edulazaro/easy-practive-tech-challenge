@@ -10,11 +10,7 @@ class ClientsController extends Controller
 {
     public function index()
     {
-        $clients = Client::where('user_id', auth()->user()->id)->get();
-
-        foreach ($clients as $client) {
-            $client->append('bookings_count');
-        }
+        $clients = Client::where('user_id', auth()->user()->id)->withCount('bookings')->get();
 
         return view('clients.index', ['clients' => $clients]);
     }

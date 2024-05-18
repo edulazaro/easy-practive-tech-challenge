@@ -2272,7 +2272,7 @@ var render = function render() {
   }, [_vm._v("List of client bookings")]), _vm._v(" "), _vm.client.bookings && _vm.client.bookings.length > 0 ? [_c("table", [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.client.bookings, function (booking) {
     return _c("tr", {
       key: booking.id
-    }, [_c("td", [_vm._v(_vm._s(booking.start) + " - " + _vm._s(booking.end))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(booking.notes))]), _vm._v(" "), _c("td", [_c("button", {
+    }, [_c("td", [_vm._v(_vm._s(booking.formatted_date))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(booking.notes))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-danger btn-sm",
       on: {
         click: function click($event) {
