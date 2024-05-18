@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientsController extends Controller
 {
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::where('user_id', auth()->user()->id)->get();
 
         foreach ($clients as $client) {
             $client->append('bookings_count');
@@ -23,11 +24,13 @@ class ClientsController extends Controller
         return view('clients.create');
     }
 
-    public function show($client)
+    public function show(Client $client)
     {
-        $client = Client::with(['bookings' => function ($query) {
+        Gate::authorize('manage-client', $client);
+
+        $client = $client->with(['bookings' => function ($query) {
             $query->orderBy('start', 'ASC');
-        }])->where('id', $client)->first();
+        }])->first();
 
         return view('clients.show', ['client' => $client]);
     }
@@ -35,6 +38,7 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         $client = new Client;
+        $client->user_id = auth()->user()->id;
         $client->name = $request->get('name');
         $client->email = $request->get('email');
         $client->phone = $request->get('phone');
@@ -46,9 +50,11 @@ class ClientsController extends Controller
         return $client;
     }
 
-    public function destroy($client)
+    public function destroy(Client $client)
     {
-        Client::where('id', $client)->delete();
+        Gate::authorize('manage-client', $client);
+
+        $client->delete();
 
         return 'Deleted';
     }
