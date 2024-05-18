@@ -1915,6 +1915,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'ClientForm',
   data: function data() {
     return {
+      errors: {},
       client: {
         name: '',
         email: '',
@@ -1927,8 +1928,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     storeClient: function storeClient() {
+      var _this = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/clients', this.client).then(function (data) {
+        console.log(data);
         window.location.href = data.data.url;
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
       });
     }
   }
@@ -2033,6 +2038,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function render() {
+  var _vm$errors, _vm$errors2, _vm$errors3;
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("h1", {
@@ -2066,7 +2072,9 @@ var render = function render() {
         _vm.$set(_vm.client, "name", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), (_vm$errors = _vm.errors) !== null && _vm$errors !== void 0 && _vm$errors.name ? _c("span", {
+    staticClass: "text-red-600"
+  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -2093,7 +2101,9 @@ var render = function render() {
         _vm.$set(_vm.client, "email", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), (_vm$errors2 = _vm.errors) !== null && _vm$errors2 !== void 0 && _vm$errors2.email ? _c("span", {
+    staticClass: "text-red-600"
+  }, [_vm._v(_vm._s(_vm.errors.email[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -2120,7 +2130,9 @@ var render = function render() {
         _vm.$set(_vm.client, "phone", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), (_vm$errors3 = _vm.errors) !== null && _vm$errors3 !== void 0 && _vm$errors3.phone ? _c("span", {
+    staticClass: "text-red-600"
+  }, [_vm._v(_vm._s(_vm.errors.phone[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {

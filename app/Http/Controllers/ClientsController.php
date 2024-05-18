@@ -6,6 +6,9 @@ use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
+use App\Rules\PhoneRule;
+use App\Rules\EmailWithTLDRule;
+
 class ClientsController extends Controller
 {
     public function index()
@@ -24,15 +27,21 @@ class ClientsController extends Controller
     {
         Gate::authorize('manage-client', $client);
 
-        $client = $client->with(['bookings' => function ($query) {
+        $client->load(['bookings' => function ($query) {
             $query->orderBy('start', 'ASC');
-        }])->first();
+        }]);
 
         return view('clients.show', ['client' => $client]);
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:190',
+            'email' => ['nullable', 'email', 'required_without:phone', new EmailWithTLDRule()],
+            'phone' => ['nullable', 'required_without:email', new PhoneRule()],
+        ]);
+
         $client = new Client;
         $client->user_id = auth()->user()->id;
         $client->name = $request->get('name');
