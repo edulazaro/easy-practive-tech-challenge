@@ -29,13 +29,11 @@ class ClientsDataController extends Controller
         $client->postcode = $request->get('postcode');
         $client->save();
 
-        return $client;
-
         return response()->json([
             'success' => true,
             'message' => 'The client was successfully created.',
             'data' => $client,
-        ], 200);
+        ], 201);
     }
 
     public function destroy(Client $client)

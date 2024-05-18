@@ -33,7 +33,7 @@ class ClientsControllerTest extends TestCase
     }
 
     /**
-     * It should be possible to see the clients in the indes view
+     * It should be possible to see the clients in the index view
      *
      * @return void
      */

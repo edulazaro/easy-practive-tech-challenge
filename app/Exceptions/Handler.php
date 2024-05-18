@@ -2,10 +2,11 @@
 
 namespace App\Exceptions;
 
+use Throwable;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -50,7 +51,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if ($request->expectsJson()) {
+
+        if ($request->expectsJson() && !$exception instanceof ValidationException) {
 
             if ($exception instanceof ModelNotFoundException) {
                 return response()->json([
