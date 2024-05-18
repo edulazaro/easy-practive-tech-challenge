@@ -1,8 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
 use App\Models\Booking;
 use App\Models\Client;
-use Illuminate\Database\Seeder;
 
 class BookingSeeder extends Seeder
 {
@@ -18,7 +21,7 @@ class BookingSeeder extends Seeder
         foreach ($clients as $client) {
             $numberOfBookings = rand(0, 30);
 
-            factory(Booking::class, $numberOfBookings)->create([
+            Booking::factory()->count($numberOfBookings)->create([
                 'client_id' => $client->id,
             ]);
         }

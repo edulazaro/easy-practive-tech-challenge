@@ -5,17 +5,17 @@ namespace Database\Factories;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use App\Models\Booking;
 use App\Models\Client;
+use App\Models\Journal;
 
-class BookingFactory extends Factory
+class JournalFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Booking::class;
+    protected $model = Journal::class;
 
     /**
      * Define the model's default state.
@@ -24,13 +24,11 @@ class BookingFactory extends Factory
      */
     public function definition(): array
     {
-        $start = Carbon::make(fake()->dateTimeBetween('-1 year', '+1 year'));
-        $end = $start->copy()->addMinutes(fake()->randomElement([15, 30, 45, 60, 75, 90]));
-    
+        $date = Carbon::make(fake()->dateTimeBetween('-1 year', '+1 year'));
+
         return [
-            'start' => $start,
-            'end' => $end,
-            'notes' => fake()->boolean(30) ? fake()->paragraphs(1, true) : '',
+            'date' => $date,
+            'content' => fake()->text(rand(100, 400), false)
         ];
     }
 
