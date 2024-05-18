@@ -2,13 +2,45 @@
 
 namespace App\Http\Controllers\Data;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+
+use App\Rules\PhoneRule;
+use App\Rules\EmailWithTLDRule;
 
 use App\Models\Client;
 
 class ClientsDataController extends Controller
 {
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:190',
+            'email' => ['nullable', 'email', 'required_without:phone', new EmailWithTLDRule()],
+            'phone' => ['nullable', 'required_without:email', new PhoneRule()],
+        ]);
+
+        $client = new Client;
+        $client->user_id = auth()->user()->id;
+        $client->name = $request->get('name');
+        $client->email = $request->get('email');
+        $client->phone = $request->get('phone');
+        $client->address = $request->get('address');
+        $client->city = $request->get('city');
+        $client->postcode = $request->get('postcode');
+        $client->save();
+
+        return $client;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'The client was successfully created.',
+            'data' => $client
+        ], 200);
+    }
+
     public function destroy(Client $client)
     {
         Gate::authorize('manage-client', $client);
@@ -17,7 +49,7 @@ class ClientsDataController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'The Journal was successfully deleted',
+            'message' => 'The Journal was successfully deleted.',
         ], 200);
     }
 }

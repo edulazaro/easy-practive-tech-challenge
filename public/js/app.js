@@ -20297,8 +20297,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     storeClient: function storeClient() {
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/clients', this.client).then(function (data) {
-        console.log(data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('data.clients.store'), this.client).then(function (data) {
         window.location.href = data.data.url;
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;

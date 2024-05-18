@@ -63,9 +63,8 @@ export default {
 
     methods: {
         storeClient() {
-            axios.post('/clients', this.client)
+            axios.post(route('data.clients.store'), this.client)
             .then((data) => {
-                console.log(data);
                 window.location.href = data.data.url;
             }).catch(error => {
                 this.errors = error.response.data.errors

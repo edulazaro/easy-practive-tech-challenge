@@ -24,18 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth', 'prefix' => 'clients'], function () {
     Route::get('/', 'ClientsController@index')->name('clients.index');
     Route::get('/create', 'ClientsController@create');
-    Route::post('/', 'ClientsController@store');
     Route::get('/{client}', 'ClientsController@show');
-
-    Route::get('/{client}/journals', 'JournalsController@index');
-    Route::post('/{client}/journals', 'JournalsController@store');
-    Route::delete('/{client}/journals/{journal}', 'JournalsController@destroy');
 });
-
 
 Route::group(['middleware' => ['auth', 'json'], 'prefix' => 'data'], function () {
 
-    Route::delete('/{client}', 'Data\ClientsDataController@destroy')->name('data.clients.destroy');
+    Route::post('/clients', 'Data\ClientsDataController@store')->name('data.clients.store');
+    Route::delete('/clients/{client}', 'Data\ClientsDataController@destroy')->name('data.clients.destroy');
 
     Route::get('/clients/{client}/bookings', 'Data\Client\ClientBookingsDataController@index')
         ->name('data.clients.bookings.index');
