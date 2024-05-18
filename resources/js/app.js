@@ -33,8 +33,15 @@ import ClientsList from './components/ClientsList.vue';
 import ClientForm from './components/ClientForm.vue';
 import ClientShow from './components/ClientShow.vue';
 
+import ClientJournals from './components/ClientJournals.vue';
+import NewJournalModal from './components/NewJournalModal.vue';
+import ViewJournalModal from './components/ViewJournalModal.vue';
+
 app.component('example-component', ExampleComponent);
 app.component('clients-list', ClientsList);
 app.component('client-form', ClientForm);
 app.component('client-show', ClientShow);
+app.component('client-journals', ClientJournals);
+app.component('new-journal-modal', NewJournalModal);
+app.component('view-journal-modal', ViewJournalModal);
 app.mount('#app');

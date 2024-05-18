@@ -49,19 +49,24 @@
                     </div>
 
                     <template v-if="bookings && bookings.length > 0">
-                        <table>
-                            <thead>
+                        <table class="w-full text-sm text-left text-gray-700">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th>Time</th>
-                                    <th>Notes</th>
-                                    <th>Actions</th>
+                                    <th class="px-4 py-2">Time</th>
+                                    <th class="px-4 py-2 hidden md:table-cell">Notes</th>
+                                    <th class="px-4 py-2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="booking in bookings" :key="booking.id">
-                                    <td>{{ booking.formatted_date }}</td>
-                                    <td>{{ booking.notes }}</td>
-                                    <td>
+                                <tr v-for="booking in bookingsList" :key="booking.id" class="bg-white border-b">
+                                    <td class="px-4 py-2">
+                                        {{ booking.formatted_date }}
+                                        <div class="font-normal mt-2 md:hidden">
+                                            Notes: <span class="text-gray-500 ">{{ booking.notes }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-2 hidden md:table-cell">{{ booking.notes }}</td>
+                                    <td class="px-4 py-2">
                                         <button class="btn btn-danger btn-sm" @click="deleteBooking(booking)">Delete</button>
                                     </td>
                                 </tr>
@@ -76,10 +81,9 @@
                 </div>
 
                 <!-- Journals -->
-                <div class="bg-white rounded p-4" v-if="currentTab == 'journals'">
+                <div class="w-full bg-white rounded p-4 border border-gray-200 rounded-md" v-if="currentTab == 'journals'">
                     <h3 class="mb-3">List of client journals</h3>
-
-                    <p>(BONUS) TODO: implement this feature</p>
+                        <client-journals :client="client" :journals='client.journals'></client-journals>
                 </div>
             </div>
         </div>

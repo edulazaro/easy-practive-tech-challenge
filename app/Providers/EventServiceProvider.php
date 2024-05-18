@@ -7,6 +7,9 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use App\Models\Journal;
+use App\Observers\JournalObserver;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -28,7 +31,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
+        Journal::observe(JournalObserver::class);
     }
 }
