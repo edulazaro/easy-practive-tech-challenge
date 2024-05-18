@@ -6,7 +6,16 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import { createApp } from 'vue';
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+
+const app = createApp({});
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,17 +28,13 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('clients-list', require('./components/ClientsList.vue').default);
-Vue.component('client-form', require('./components/ClientForm.vue').default);
-Vue.component('client-show', require('./components/ClientShow.vue').default);
+import ExampleComponent from './components/ExampleComponent.vue';
+import ClientsList from './components/ClientsList.vue';
+import ClientForm from './components/ClientForm.vue';
+import ClientShow from './components/ClientShow.vue';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
-});
+app.component('example-component', ExampleComponent);
+app.component('clients-list', ClientsList);
+app.component('client-form', ClientForm);
+app.component('client-show', ClientShow);
+app.mount('#app');
