@@ -109,7 +109,10 @@ export default {
     methods: {
         filterBookings() {
 
-            axios.get(`/data/clients/${this.client.id}/bookings`, { params: { filter: this.bookingFilter } }).then(response => {
+            axios.get(route('data.clients.bookings.index', { client: this.client.id }), {
+                params: { filter: this.bookingFilter } 
+            })
+            .then(response => {
                 this.bookings = response.data;
             })
             .catch(error => {
