@@ -23,6 +23,8 @@ class ClientBookingsDataController extends Controller
                 break;
         }
 
+        $query->orderBy('start', 'ASC');
+
         return response()->json($query->get());
     }
 }

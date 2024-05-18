@@ -20384,9 +20384,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    filterBookings: function filterBookings() {
+    getBookings: function getBookings() {
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/data/clients/".concat(this.client.id, "/bookings"), {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(route('data.clients.bookings.index', {
+        client: this.client.id
+      }), {
         params: {
           filter: this.bookingFilter
         }
@@ -20400,7 +20402,10 @@ __webpack_require__.r(__webpack_exports__);
       this.currentTab = newTab;
     },
     deleteBooking: function deleteBooking(booking) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/bookings/".concat(booking.id));
+      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](route('data.bookings.destroy', {
+        booking: booking.id
+      }));
+      this.getBookings();
     }
   }
 });
@@ -20900,9 +20905,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.bookingFilter = $event;
     }),
     onChange: _cache[3] || (_cache[3] = function () {
-      return $options.filterBookings && $options.filterBookings.apply($options, arguments);
+      return $options.getBookings && $options.getBookings.apply($options, arguments);
     })
-  }, [].concat(_hoisted_19), 544 /* NEED_HYDRATION, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.bookingFilter]])]), $data.bookings && $data.bookings.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.bookingsList, function (booking) {
+  }, [].concat(_hoisted_19), 544 /* NEED_HYDRATION, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.bookingFilter]])]), $data.bookings && $data.bookings.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bookings, function (booking) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: booking.id,
       "class": "bg-white border-b"

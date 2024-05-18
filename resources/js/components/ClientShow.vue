@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <label for="bookingFilter">Filter Bookings:</label>
-                        <select class="form-control cursor-pointer" id="bookingFilter" v-model="bookingFilter" @change="filterBookings">
+                        <select class="form-control cursor-pointer" id="bookingFilter" v-model="bookingFilter" @change="getBookings">
                             <option value="all">All bookings</option>
                             <option value="past">Past bookings only</option>
                             <option value="future">Future bookings only</option>
@@ -58,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="booking in bookingsList" :key="booking.id" class="bg-white border-b">
+                                <tr v-for="booking in bookings" :key="booking.id" class="bg-white border-b">
                                     <td class="px-4 py-2">
                                         {{ booking.formatted_date }}
                                         <div class="font-normal mt-2 md:hidden">
@@ -107,7 +107,7 @@ export default {
     },
 
     methods: {
-        filterBookings() {
+        getBookings() {
 
             axios.get(route('data.clients.bookings.index', { client: this.client.id }), {
                 params: { filter: this.bookingFilter } 
@@ -125,7 +125,11 @@ export default {
         },
 
         deleteBooking(booking) {
-            axios.delete(`/bookings/${booking.id}`);
+            axios.delete(
+                route('data.bookings.destroy', { booking: booking.id })
+            );
+
+            this.getBookings();
         }
     }
 }

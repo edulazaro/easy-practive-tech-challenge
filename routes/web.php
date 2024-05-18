@@ -32,14 +32,14 @@ Route::group(['middleware' => ['auth', 'json'], 'prefix' => 'data'], function ()
     Route::post('/clients', 'Data\ClientsDataController@store')->name('data.clients.store');
     Route::delete('/clients/{client}', 'Data\ClientsDataController@destroy')->name('data.clients.destroy');
 
+    Route::delete('/journals/{journal}', 'Data\JournalsDataController@destroy')->name('data.journals.destroy');
+    Route::delete('/bookings/{booking}', 'Data\BookingsDataController@destroy')->name('data.bookings.destroy');
+
     Route::get('/clients/{client}/bookings', 'Data\Client\ClientBookingsDataController@index')
         ->name('data.clients.bookings.index');
-
     Route::get('/clients/{client}/journals', 'Data\Client\ClientJournalsDataController@index')
         ->name('data.clients.journals.index');
-
     Route::post('/clients/{client}/journals', 'Data\Client\ClientJournalsDataController@store')
         ->name('data.clients.journals.store');
 
-    Route::delete('/journals/{journal}', 'JSON\JournalsDataController@destroy')->name('data.journals.destroy');
 });

@@ -39,4 +39,9 @@ class Booking extends Model
 
         return $startDateFormatted.' to '.$endDate->format('l d F Y, H:i');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

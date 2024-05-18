@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use App\Models\Journal;
 use Illuminate\Support\Facades\Gate;
+
+use App\Models\Journal;
 
 class JournalsDataController extends Controller
 {
