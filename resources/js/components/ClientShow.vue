@@ -39,7 +39,16 @@
                 <div class="bg-white rounded p-4" v-if="currentTab == 'bookings'">
                     <h3 class="mb-3">List of client bookings</h3>
 
-                    <template v-if="client.bookings && client.bookings.length > 0">
+                    <div class="form-group">
+                        <label for="bookingFilter">Filter Bookings:</label>
+                        <select class="form-control cursor-pointer" id="bookingFilter" v-model="bookingFilter" @change="filterBookings">
+                            <option value="all">All bookings</option>
+                            <option value="past">Past bookings only</option>
+                            <option value="future">Future bookings only</option>
+                        </select>
+                    </div>
+
+                    <template v-if="bookings && bookings.length > 0">
                         <table>
                             <thead>
                                 <tr>
@@ -49,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="booking in client.bookings" :key="booking.id">
+                                <tr v-for="booking in bookings" :key="booking.id">
                                     <td>{{ booking.formatted_date }}</td>
                                     <td>{{ booking.notes }}</td>
                                     <td>
@@ -87,11 +96,23 @@ export default {
 
     data() {
         return {
+            bookings: this.client.bookings,
             currentTab: 'bookings',
+            bookingFilter: 'all'
         }
     },
 
     methods: {
+        filterBookings() {
+
+            axios.get(`/data/clients/${this.client.id}/bookings`, { params: { filter: this.bookingFilter } }).then(response => {
+                this.bookings = response.data;
+            })
+            .catch(error => {
+                console.error('There was an error fetching the bookings:', error);
+            });
+        },
+
         switchTab(newTab) {
             this.currentTab = newTab;
         },

@@ -18,6 +18,26 @@ class ClientsController extends Controller
         return view('clients.index', ['clients' => $clients]);
     }
 
+    public function indexAsync(Client $client)
+    {
+        Gate::authorize('manage-client', $client);
+
+        $query = $client->bookings();
+
+        switch (request()->filter) {
+            case 'past':
+                $query->where('start', '<', now());
+                break;
+            case 'future':
+                $query->where('start', '>', now());
+                break;
+        }
+
+        $bookings = $query->get();
+
+        return response()->json($bookings);
+    }
+
     public function create()
     {
         return view('clients.create');
