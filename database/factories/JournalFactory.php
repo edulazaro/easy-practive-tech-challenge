@@ -10,11 +10,7 @@ use App\Models\Journal;
 
 class JournalFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
+    /** @var string The name of the factory's corresponding model. */
     protected $model = Journal::class;
 
     /**

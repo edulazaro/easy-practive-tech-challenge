@@ -23,8 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'clients'], function () {
     Route::get('/', 'ClientsController@index')->name('clients.index');
-    Route::get('/create', 'ClientsController@create');
-    Route::get('/{client}', 'ClientsController@show');
+    Route::get('/create', 'ClientsController@create')->name('clients.create');
+    Route::get('/{client}', 'ClientsController@show')->name('clients.show');
 });
 
 Route::group(['middleware' => ['auth', 'json'], 'prefix' => 'data'], function () {

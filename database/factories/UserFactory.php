@@ -10,11 +10,7 @@ use App\Models\User;
 
 class UserFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
+    /** @var string The name of the factory's corresponding model. */
     protected $model = User::class;
 
     /**

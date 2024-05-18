@@ -13,7 +13,7 @@ class ClientSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $user = User::first() ?? User::factory()->create([
             'name' => 'Test User',

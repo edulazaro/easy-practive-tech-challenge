@@ -10,11 +10,7 @@ use App\Models\Client;
 
 class BookingFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
+    /** @var string The name of the factory's corresponding model. */
     protected $model = Booking::class;
 
     /**

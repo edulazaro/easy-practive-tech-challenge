@@ -4,15 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\User;
 use App\Models\Client;
 
 class ClientFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
+    /** @var string The name of the factory's corresponding model. */
     protected $model = Client::class;
 
     /**
@@ -30,5 +27,23 @@ class ClientFactory extends Factory
             'city' => fake()->city,
             'postcode' => fake()->postcode,
         ];
+    }
+
+    public function withNewUser(): Factory
+    {
+        $user = User::factory()->create();
+        return $this->state([
+            'user_id' => $user,
+        ]);
+ 
+    }
+
+    public function withUser(): Factory
+    {
+        $user = User::inRandomOrder()->first() ?? User::factory()->create();
+        return $this->state([
+            'user_id' => $user,
+        ]);
+ 
     }
 }
