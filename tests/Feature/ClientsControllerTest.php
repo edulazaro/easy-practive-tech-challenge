@@ -21,7 +21,7 @@ class ClientsControllerTest extends TestCase
     public function test_index_method_should_not_return_clients_of_öther_users()
     {
         $user = User::factory()->create();
-        $client = Client::factory()->withNewUser()->create();
+        $client = Client::factory()->create();
     
         $response = $this->actingAs($user)->get(route('clients.index'));
     
@@ -74,7 +74,7 @@ class ClientsControllerTest extends TestCase
     public function test_show_method_aborts_for_unauthorized_user()
     {
         $user = User::factory()->create();
-        $client = Client::factory()->withNewUser()->create();
+        $client = Client::factory()->create();
 
         $response = $this->actingAs($user)->get(route('clients.show', $client));
         $response->assertStatus(403);

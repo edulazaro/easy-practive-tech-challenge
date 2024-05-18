@@ -26,16 +26,8 @@ class ClientFactory extends Factory
             'address' => fake()->streetAddress,
             'city' => fake()->city,
             'postcode' => fake()->postcode,
+            'user_id' => User::factory(),
         ];
-    }
-
-    public function withNewUser(): Factory
-    {
-        $user = User::factory()->create();
-        return $this->state([
-            'user_id' => $user,
-        ]);
- 
     }
 
     public function withUser(): Factory

@@ -6,7 +6,6 @@ class StringHelper
 {
     public static function getExcerpt($content, $maxLength = 255)
     {
-
         if (strlen($content) <= $maxLength) {
             return $content;
         }
