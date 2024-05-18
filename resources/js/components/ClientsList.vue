@@ -47,9 +47,10 @@ export default {
 
     methods: {
         deleteClient(client) {
-            axios.delete(`/clients/${client.id}`)
-            .then(response => {
-                    this.clientsList = this.clientsList.filter(clientToCheck => clientToCheck.id !== client.id);
+            axios.delete(route('data.clients.destroy', { 
+                client: client.id
+            })).then(response => {
+                this.clientsList = this.clientsList.filter(clientToCheck => clientToCheck.id !== client.id);
             })
             .catch(error => {
                 console.error('There was an error deleting the client:', error);

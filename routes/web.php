@@ -26,7 +26,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'clients'], function () {
     Route::get('/create', 'ClientsController@create');
     Route::post('/', 'ClientsController@store');
     Route::get('/{client}', 'ClientsController@show');
-    Route::delete('/{client}', 'ClientsController@destroy');
 
     Route::get('/{client}/journals', 'JournalsController@index');
     Route::post('/{client}/journals', 'JournalsController@store');
@@ -35,6 +34,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'clients'], function () {
 
 
 Route::group(['middleware' => ['auth', 'json'], 'prefix' => 'data'], function () {
+
+    Route::delete('/{client}', 'Data\ClientsDataController@destroy')->name('data.clients.destroy');
 
     Route::get('/clients/{client}/bookings', 'Data\Client\ClientBookingsDataController@index')
         ->name('data.clients.bookings.index');

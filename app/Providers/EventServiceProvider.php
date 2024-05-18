@@ -34,7 +34,6 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
         
-
         Client::observe(ClientObserver::class);
         Journal::observe(JournalObserver::class);
     }

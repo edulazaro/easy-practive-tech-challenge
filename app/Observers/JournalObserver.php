@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Helpers\StringHelper;
 use App\Models\Journal;
+use App\Helpers\StringHelper;
 
 class JournalObserver
 {

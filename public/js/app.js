@@ -20433,7 +20433,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     deleteClient: function deleteClient(client) {
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/clients/".concat(client.id)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](route('data.clients.destroy', {
+        client: client.id
+      })).then(function (response) {
         _this.clientsList = _this.clientsList.filter(function (clientToCheck) {
           return clientToCheck.id !== client.id;
         });
