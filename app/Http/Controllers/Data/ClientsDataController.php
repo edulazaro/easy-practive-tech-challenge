@@ -3,15 +3,23 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
 use App\Rules\EmailWithTLDRule;
 use App\Rules\PhoneRule;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Client;
 
 class ClientsDataController extends Controller
 {
-    public function store(Request $request)
+    /**
+     * Store a new client.
+     *
+     * @param Request $request The request with the client data.
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         $this->validate($request, [
             'name' => 'required|max:190',
@@ -36,7 +44,13 @@ class ClientsDataController extends Controller
         ], 201);
     }
 
-    public function destroy(Client $client)
+    /**
+     * Delete a client.
+     *
+     * @param Client $client The client to  delete.
+     * @return JsonResponse
+     */
+    public function destroy(Client $client): JsonResponse
     {
         Gate::authorize('manage-client', $client);
 
