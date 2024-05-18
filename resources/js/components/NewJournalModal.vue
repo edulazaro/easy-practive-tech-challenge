@@ -110,7 +110,6 @@ export default {
         storeJournal() {
             axios.post(route('data.clients.journals.store', { client: this.client.id }), this.journal)
             .then((data) => {
-                //console.log(data);
                 this.closeModal();
                 this.$emit('added-client-journal');
             })

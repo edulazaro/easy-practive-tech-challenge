@@ -87,7 +87,16 @@ class ClientJournalsDataControllerTest extends TestCase
 
         $response = $this->actingAs($user)->postJson(route('data.clients.journals.store', $client), $journalData);
 
-        $response->assertStatus(201);
+        $response->assertStatus(201)
+        ->assertJson([
+            'success' => true,
+            'message' => 'The journal was successfully created.',
+            'data' => [
+                'date' => $journalData['date'],
+                'content' => $journalData['content'],
+            ]
+        ]);
+
         $this->assertDatabaseHas('journals', [
             'client_id' => $client->id,
             'date' => $journalData['date'],

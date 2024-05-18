@@ -33,6 +33,10 @@ class ClientJournalsDataController extends Controller
         $journal->content = request()->get('content');
         $journal->save();
 
-        return response()->json($journal, 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'The journal was successfully created.',
+            'data' => $journal,
+        ], 201);
     }
 }

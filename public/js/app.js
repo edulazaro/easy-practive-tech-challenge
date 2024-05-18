@@ -20515,7 +20515,6 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(route('data.clients.journals.store', {
         client: this.client.id
       }), this.journal).then(function (data) {
-        //console.log(data);
         _this.closeModal();
         _this.$emit('added-client-journal');
       })["catch"](function (error) {
