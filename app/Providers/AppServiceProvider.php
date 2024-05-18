@@ -6,8 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
 
-use App\User;
-use App\Client;
+use App\Models\User;
+use App\Models\Client;
 
 class AppServiceProvider extends ServiceProvider
 {

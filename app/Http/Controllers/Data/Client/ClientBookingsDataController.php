@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
 
-use App\Client;
+use App\Models\Client;
 
 class ClientBookingsDataController extends Controller
 {
