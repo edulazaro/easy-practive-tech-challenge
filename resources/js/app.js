@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 import { ZiggyVue  } from '../../vendor/tightenco/ziggy';
+import vClickOutside from "click-outside-vue3"
 import { createApp } from 'vue';
 
 /**
@@ -15,8 +16,8 @@ import { createApp } from 'vue';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
 const app = createApp({});
+app.use(vClickOutside)
 app.use(ZiggyVue);
 
 /**

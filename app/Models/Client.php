@@ -18,10 +18,6 @@ class Client extends Model
         'postcode',
     ];
 
-    protected $appends = [
-        'url',
-    ];
-
     public function bookings()
     {
         return $this->hasMany(Booking::class);
@@ -30,10 +26,5 @@ class Client extends Model
     public function journals()
     {
         return $this->hasMany(Journal::class);
-    }
-
-    public function getUrlAttribute()
-    {
-        return '/clients/'.$this->id;
     }
 }

@@ -116,7 +116,7 @@ export default {
             axios
                 .post(route("data.clients.store"), this.client)
                 .then((data) => {
-                    window.location.href = data.data.url;
+                    window.location.href = route('clients.show', { client: data.data.data.id});
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors;
