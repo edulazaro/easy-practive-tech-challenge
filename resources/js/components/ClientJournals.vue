@@ -1,6 +1,9 @@
 <template>
     <div>
-        <new-journal-modal :client="client" @added-client-journal="getJournals" />
+        <new-journal-modal
+            :client="client"
+            @added-client-journal="getJournals"
+        />
 
         <div class="w-full" v-if="selectedJournal">
             <view-journal-modal
@@ -24,9 +27,12 @@
                         <tbody>
                             <tr
                                 v-for="journal in journalsList"
+                                class="border-b"
                                 :key="journal.id"
                             >
-                                <td class="px-4 py-2">{{ journal.date }}</td>
+                                <td class="px-4 py-2">
+                                    {{ journal.formatted_date }}
+                                </td>
                                 <td class="px-4 py-2">{{ journal.excerpt }}</td>
                                 <td class="px-4 py-2 space-x-2">
                                     <button
@@ -61,13 +67,20 @@ import axios from "axios";
 export default {
     name: "ClientJournals",
 
-    props: ["client", "journals"],
+    props: {
+        client: Object,
+        journals: Array,
+    },
 
     data() {
         return {
-            journalsList: this.journals,
-            selectedJournal: false,
+            journalsList: [],
+            selectedJournal: null,
         };
+    },
+
+    created() {
+        this.journalsList = [...this.journals];
     },
 
     methods: {
@@ -98,10 +111,14 @@ export default {
         },
 
         deleteJournal(journal) {
-            axios.delete(
-                route("data.journals.destroy", { journal: journal.id })
-            );
-            this.getJournals();
+            axios
+                .delete(route("data.journals.destroy", { journal: journal.id }))
+                .then(() => {
+                    this.getJournals();
+                })
+                .catch((error) => {
+                    console.error("Failed to delete journal:", error);
+                });
         },
     },
 };

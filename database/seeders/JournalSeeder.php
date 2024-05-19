@@ -2,17 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-
-use App\Models\Journal;
 use App\Models\Client;
+use App\Models\Journal;
+use Illuminate\Database\Seeder;
 
 class JournalSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {

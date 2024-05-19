@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
-use App\Models\Client;
 use App\Models\Booking;
+use App\Models\Client;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ClientBookingsDataControllerTest extends TestCase
 {
@@ -22,12 +21,13 @@ class ClientBookingsDataControllerTest extends TestCase
         $client = Client::factory()->create();
 
         Booking::factory()->count(4)->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', [
-            'client' => $client->id
-        ]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.bookings.index', [
+                'client' => $client->id,
+            ]));
 
         $response->assertStatus(403);
     }
@@ -43,12 +43,13 @@ class ClientBookingsDataControllerTest extends TestCase
         ]);
 
         $bookings = Booking::factory()->count(4)->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', [
-            'client' => $client->id
-        ]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.bookings.index', [
+                'client' => $client->id,
+            ]));
 
         $response->assertStatus(200);
         $response->assertJsonCount($bookings->count());
@@ -76,16 +77,19 @@ class ClientBookingsDataControllerTest extends TestCase
             'start' => $dateAfterNow,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', [
-            'client' => $client->id,
-            'when' => 'past'
-        ]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.bookings.index', [
+                'client' => $client->id,
+                'when' => 'past',
+            ]));
 
         $response->assertStatus(200);
         $response->assertJsonCount($pastBookings->count());
-        $response->assertJsonFragment(['start' => $dateBeforeNow->toDateTimeString()]);
-    }
 
+        $response->assertJsonFragment([
+            'start' => $dateBeforeNow->toDateTimeString()
+        ]);
+    }
 
     /**
      * Test that a user can get the past bookings of of of his clients
@@ -109,14 +113,17 @@ class ClientBookingsDataControllerTest extends TestCase
             'start' => $dateAfterNow,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', [
-            'client' => $client->id,
-            'when' => 'future'
-        ]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.bookings.index', [
+                'client' => $client->id,
+                'when' => 'future',
+            ]));
 
         $response->assertStatus(200);
         $response->assertJsonCount($futureBookings->count());
-        $response->assertJsonFragment(['start' => $dateAfterNow->toDateTimeString()]);
+        $response->assertJsonFragment([
+            'start' => $dateAfterNow->toDateTimeString(),
+        ]);
     }
 
     /**
@@ -132,7 +139,7 @@ class ClientBookingsDataControllerTest extends TestCase
         $dateTomorrow = now()->addDays(1);
         Booking::factory()->create([
             'client_id' => $client->id,
-            'start' => $dateTomorrow ,
+            'start' => $dateTomorrow,
         ]);
 
         $datePastTomorrow = now()->addDays(2);
@@ -141,11 +148,21 @@ class ClientBookingsDataControllerTest extends TestCase
             'start' => $datePastTomorrow,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', ['client' => $client->id]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.bookings.index', [
+                'client' => $client->id,
+            ]));
 
         $bookings = $response->json();
 
-        $this->assertEquals($dateTomorrow ->toDateTimeString(), $bookings[0]['start']);
-        $this->assertEquals($datePastTomorrow->toDateTimeString(), $bookings[1]['start']);
+        $this->assertEquals(
+            $dateTomorrow->toDateTimeString(),
+            $bookings[0]['start']
+        );
+
+        $this->assertEquals(
+            $datePastTomorrow->toDateTimeString(),
+            $bookings[1]['start']
+        );
     }
 }

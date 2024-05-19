@@ -3,25 +3,23 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-
 use App\Models\Client;
 use App\Models\Journal;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class ClientJournalsDataController extends Controller
 {
     /**
      * Show a list of journals for a client.
      *
-     * @param Client $client The client whose journals should be retrieved.
-     * @return JsonResponse
+     * @param  Client  $client  The client whose journals should be retrieved.
      */
     public function index(Client $client): JsonResponse
     {
         Gate::authorize('manage-client', $client);
 
-        $query = $client->journals();
+        $query = $client->journals()->orderBy('date', 'ASC');
 
         return response()->json($query->get());
     }
@@ -29,8 +27,7 @@ class ClientJournalsDataController extends Controller
     /**
      * Stores a new journal entry for a client.
      *
-     * @param Client $client The client for whom the journal is created.
-     * @return JsonResponse
+     * @param  Client  $client  The client for whom the journal is created.
      */
     public function store(Client $client): JsonResponse
     {
@@ -41,7 +38,7 @@ class ClientJournalsDataController extends Controller
             'content' => 'required',
         ]);
 
-        $journal = new Journal;
+        $journal = new Journal();
         $journal->client_id = $client->id;
         $journal->date = request()->get('date');
         $journal->content = strip_tags(request()->get('content'));

@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Client extends Model
 {
     use HasFactory;
 
-    /** @var array<string> The attributes that are mass assignable. */
+    /** @var array The attributes that are mass assignable. */
     protected $fillable = [
         'name',
         'email',
@@ -22,8 +22,6 @@ class Client extends Model
 
     /**
      * Bookings associated with the client.
-     *
-     * @return HasMany
      */
     public function bookings(): HasMany
     {
@@ -32,8 +30,6 @@ class Client extends Model
 
     /**
      * Journals associated with the client.
-     *
-     * @return HasMany
      */
     public function journals(): HasMany
     {

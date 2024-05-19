@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-
 use App\Models\Journal;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class JournalsDataController extends Controller
 {
-     /**
+    /**
      * Delete a journal entry.
      *
-     * @param Journal $journal The journal entry to  delete.
-     * @return JsonResponse
+     * @param  Journal  $journal  The journal entry to  delete.
      */
     public function destroy(Journal $journal): JsonResponse
     {

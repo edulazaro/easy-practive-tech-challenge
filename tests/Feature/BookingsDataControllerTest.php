@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
-use App\Models\Client;
 use App\Models\Booking;
+use App\Models\Client;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class BookingsDataControllerTest extends TestCase
 {
@@ -22,10 +21,11 @@ class BookingsDataControllerTest extends TestCase
         $client = Client::factory()->create();
 
         $booking = Booking::factory()->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->deleteJson(route('data.bookings.destroy', $booking));
+        $response = $this->actingAs($user)
+            ->deleteJson(route('data.bookings.destroy', $booking));
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('bookings', ['id' => $booking->id]);
@@ -42,15 +42,17 @@ class BookingsDataControllerTest extends TestCase
         ]);
 
         $booking = Booking::factory()->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->deleteJson(route('data.bookings.destroy', $booking));
+        $response = $this->actingAs($user)->deleteJson(
+            route('data.bookings.destroy', $booking)
+        );
 
         $response->assertStatus(200)
             ->assertJson([
                 'success' => true,
-                'message' => 'The Booking was successfully deleted'
+                'message' => 'The Booking was successfully deleted',
             ]);
 
         $this->assertDatabaseMissing('bookings', ['id' => $booking->id]);

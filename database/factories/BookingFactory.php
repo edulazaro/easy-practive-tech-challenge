@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 use App\Models\Booking;
 use App\Models\Client;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 class BookingFactory extends Factory
 {
@@ -22,7 +21,7 @@ class BookingFactory extends Factory
     {
         $start = Carbon::make(fake()->dateTimeBetween('-1 year', '+1 year'));
         $end = $start->copy()->addMinutes(fake()->randomElement([15, 30, 45, 60, 75, 90]));
-    
+
         return [
             'start' => $start,
             'end' => $end,

@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
 use App\Models\Client;
 use App\Models\Journal;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ClientJournalsDataControllerTest extends TestCase
 {
@@ -22,12 +21,13 @@ class ClientJournalsDataControllerTest extends TestCase
         $client = Client::factory()->create();
 
         Journal::factory()->count(4)->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.journals.index', [
-            'client' => $client->id
-        ]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.journals.index', [
+                'client' => $client->id,
+            ]));
 
         $response->assertStatus(403);
     }
@@ -43,18 +43,19 @@ class ClientJournalsDataControllerTest extends TestCase
         ]);
 
         $journals = Journal::factory()->count(4)->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->getJson(route('data.clients.journals.index', [
-            'client' => $client->id
-        ]));
+        $response = $this->actingAs($user)
+            ->getJson(route('data.clients.journals.index', [
+                'client' => $client->id,
+            ]));
 
         $response->assertStatus(200);
         $response->assertJsonCount($journals->count());
     }
 
-     /**
+    /**
      * Test that a journal cannot be added without the required fields
      */
     public function test_cannot_add_journal_without_required_fields()
@@ -64,13 +65,14 @@ class ClientJournalsDataControllerTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response = $this->actingAs($user)->postJson(route('data.clients.journals.store', $client), []);
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.journals.store', $client), []);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['date', 'content']);
     }
 
-     /**
+    /**
      * Test that a journal can be added with the required fields
      */
     public function test_journal_added_with_required_fields()
@@ -82,20 +84,24 @@ class ClientJournalsDataControllerTest extends TestCase
 
         $journalData = [
             'date' => now()->toDateString(),
-            'content' => 'Journal entry content'
+            'content' => 'Journal entry content',
         ];
 
-        $response = $this->actingAs($user)->postJson(route('data.clients.journals.store', $client), $journalData);
+        $response = $this->actingAs($user)
+            ->postJson(
+                route('data.clients.journals.store', $client),
+                $journalData
+            );
 
         $response->assertStatus(201)
-        ->assertJson([
-            'success' => true,
-            'message' => 'The journal was successfully created.',
-            'data' => [
-                'date' => $journalData['date'],
-                'content' => $journalData['content'],
-            ]
-        ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'The journal was successfully created.',
+                'data' => [
+                    'date' => $journalData['date'],
+                    'content' => $journalData['content'],
+                ],
+            ]);
 
         $this->assertDatabaseHas('journals', [
             'client_id' => $client->id,

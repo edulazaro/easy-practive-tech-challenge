@@ -12,6 +12,6 @@ class JournalObserver
     */
     public function creating(Journal $journal): void
     {
-        $journal->excerpt = StringHelper::getExcerpt($journal->content, 80);
+        $journal->excerpt = StringHelper::getExcerpt($journal->content, 60);
     }
 }

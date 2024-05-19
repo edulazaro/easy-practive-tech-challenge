@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-
-use App\Models\User;
 use App\Models\Client;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ClientFactory extends Factory
 {
@@ -33,9 +32,10 @@ class ClientFactory extends Factory
     public function withUser(): Factory
     {
         $user = User::inRandomOrder()->first() ?? User::factory()->create();
+
         return $this->state([
             'user_id' => $user,
         ]);
- 
+
     }
 }

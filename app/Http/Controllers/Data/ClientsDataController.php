@@ -3,31 +3,34 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-
+use App\Models\Client;
 use App\Rules\EmailWithTLDRule;
 use App\Rules\PhoneRule;
-use App\Models\Client;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientsDataController extends Controller
 {
     /**
      * Store a new client.
      *
-     * @param Request $request The request with the client data.
-     * @return JsonResponse
+     * @param  Request  $request  The request with the client data.
      */
     public function store(Request $request): JsonResponse
     {
         $this->validate($request, [
             'name' => 'required|max:190',
-            'email' => ['nullable', 'email', 'required_without:phone', new EmailWithTLDRule()],
+            'email' => [
+                'nullable',
+                'email',
+                'required_without:phone',
+                new EmailWithTLDRule(),
+            ],
             'phone' => ['nullable', 'required_without:email', new PhoneRule()],
         ]);
 
-        $client = new Client;
+        $client = new Client();
         $client->user_id = auth()->user()->id;
         $client->name = $request->get('name');
         $client->email = $request->get('email');
@@ -47,8 +50,7 @@ class ClientsDataController extends Controller
     /**
      * Delete a client.
      *
-     * @param Client $client The client to  delete.
-     * @return JsonResponse
+     * @param  Client  $client  The client to  delete.
      */
     public function destroy(Client $client): JsonResponse
     {

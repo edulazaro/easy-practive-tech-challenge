@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 use App\Models\Client;
 use App\Models\Journal;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 class JournalFactory extends Factory
 {
@@ -24,7 +23,7 @@ class JournalFactory extends Factory
 
         return [
             'date' => $date,
-            'content' => fake()->text(rand(100, 400), false)
+            'content' => fake()->text(rand(100, 400), false),
         ];
     }
 

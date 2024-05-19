@@ -15,7 +15,10 @@ class EmailWithTLDRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/', $value) > 0;
+        return preg_match(
+            '/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/',
+            $value
+        ) > 0;
     }
 
     /**
@@ -25,6 +28,7 @@ class EmailWithTLDRule implements Rule
      */
     public function message()
     {
-        return 'The :attribute must be a valid email address with a top-level domain.';
+        return 'The :attribute must be a valid email address with ' .
+            'a top-level domain.';
     }
 }

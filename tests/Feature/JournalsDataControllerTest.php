@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
 use App\Models\Client;
 use App\Models\Journal;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class JournalsDataControllerTest extends TestCase
 {
@@ -22,11 +21,11 @@ class JournalsDataControllerTest extends TestCase
         $client = Client::factory()->create();
 
         $journal = Journal::factory()->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-
-        $response = $this->actingAs($user)->deleteJson(route('data.journals.destroy', $journal));
+        $response = $this->actingAs($user)
+            ->deleteJson(route('data.journals.destroy', $journal));
 
         $response->assertStatus(403);
         $this->assertDatabaseHas('journals', ['id' => $journal->id]);
@@ -43,16 +42,17 @@ class JournalsDataControllerTest extends TestCase
         ]);
 
         $journal = Journal::factory()->create([
-            'client_id' => $client->id
+            'client_id' => $client->id,
         ]);
 
-        $response = $this->actingAs($user)->deleteJson(route('data.journals.destroy', $journal));
+        $response = $this->actingAs($user)
+            ->deleteJson(route('data.journals.destroy', $journal));
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'success' => true,
-                     'message' => 'The Journal was successfully deleted'
-                 ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'The Journal was successfully deleted',
+            ]);
 
         $this->assertDatabaseMissing('journals', ['id' => $journal->id]);
     }

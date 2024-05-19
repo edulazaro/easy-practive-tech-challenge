@@ -79,7 +79,7 @@
 
                 <!-- Bookings -->
                 <div
-                    class="bg-white rounded p-4"
+                class="w-full bg-white rounded p-4 border border-gray-200 rounded-md"
                     v-if="currentTab == 'bookings'"
                 >
                     <h3 class="mb-3">List of client bookings</h3>
@@ -115,7 +115,7 @@
                                 <tr
                                     v-for="booking in bookings"
                                     :key="booking.id"
-                                    class="bg-white border-b"
+                                    class="border-b"
                                 >
                                     <td class="px-4 py-2">
                                         {{ booking.formatted_date }}
@@ -150,13 +150,13 @@
                 <!-- Journals -->
                 <div
                     class="w-full bg-white rounded p-4 border border-gray-200 rounded-md"
-                    v-if="currentTab == 'journals'"
+                    v-show="currentTab == 'journals'"
                 >
                     <h3 class="mb-3">List of client journals</h3>
                     <client-journals
                         :client="client"
                         :journals="client.journals"
-                    ></client-journals>
+                    />
                 </div>
             </div>
         </div>

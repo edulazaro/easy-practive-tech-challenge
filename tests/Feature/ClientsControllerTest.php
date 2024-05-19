@@ -2,15 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Models\Client;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
-use App\Models\Client;
-
 class ClientsControllerTest extends TestCase
-{ 
+{
     use RefreshDatabase;
 
     /**
@@ -18,17 +16,17 @@ class ClientsControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_index_method_should_not_return_clients_of_öther_users()
+    public function test_index_should_not_return_clients_of_other_users()
     {
         $user = User::factory()->create();
         $client = Client::factory()->create();
-    
+
         $response = $this->actingAs($user)->get(route('clients.index'));
-    
+
         $response->assertStatus(200);
         $response->assertViewIs('clients.index');
         $response->assertViewHas('clients', function ($clients) use ($client) {
-            return !$clients->contains($client);
+            return ! $clients->contains($client);
         });
     }
 
@@ -41,9 +39,9 @@ class ClientsControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $client = Client::factory()->create(['user_id' => $user->id]);
-    
+
         $response = $this->actingAs($user)->get(route('clients.index'));
-    
+
         $response->assertStatus(200);
         $response->assertViewIs('clients.index');
         $response->assertViewHas('clients', function ($clients) use ($client) {
@@ -76,7 +74,9 @@ class ClientsControllerTest extends TestCase
         $user = User::factory()->create();
         $client = Client::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('clients.show', $client));
+        $response = $this->actingAs($user)
+            ->get(route('clients.show', $client));
+
         $response->assertStatus(403);
     }
 
@@ -90,7 +90,8 @@ class ClientsControllerTest extends TestCase
         $user = User::factory()->create();
         $client = Client::factory()->create(['user_id' => $user->id]);
 
-        $response = $this->actingAs($user)->get(route('clients.show', $client));
+        $response = $this->actingAs($user)
+            ->get(route('clients.show', $client));
 
         $response->assertStatus(200);
         $response->assertViewIs('clients.show');

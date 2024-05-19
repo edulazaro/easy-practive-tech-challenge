@@ -3,26 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class ClientsController extends Controller
 {
     /**
      * Display a list of clients.
-     *
-     * @return View
      */
     public function index(): View
     {
-        $clients = Client::where('user_id', auth()->user()->id)->withCount('bookings')->get();
+        $clients = Client::where('user_id', auth()->user()->id)
+            ->withCount('bookings')->get();
+
         return view('clients.index', ['clients' => $clients]);
     }
 
     /**
      * Show the form for creating a new client.
-     *
-     * @return View
      */
     public function create(): View
     {
@@ -32,8 +30,7 @@ class ClientsController extends Controller
     /**
      * Display the specified client.
      *
-     * @param Client $client The client to show.
-     * @return View
+     * @param  Client  $client  The client to show.
      */
     public function show(Client $client): View
     {

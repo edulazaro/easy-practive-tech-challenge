@@ -3,37 +3,35 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Booking extends Model
 {
     use HasFactory;
 
-    /** @var array<string>  Attributes appended to the model array and JSON. */
-    protected array $appends = [
+    /** @var array Attributes appended to the model array and JSON. */
+    protected $appends = [
         'formatted_date',
     ];
 
-    /** @var array<string> The attributes that are mass assignable. */
-    protected array $fillable = [
+    /** @var array The attributes that are mass assignable. */
+    protected $fillable = [
         'client_id',
         'start',
         'end',
         'notes',
     ];
 
-    /** @var array<string> The attributes that should be casted. */
+    /** @var array The attributes that should be casted. */
     protected $casts = [
-        'start' => 'datetime',
-        'end' => 'datetime',
+        'start' => 'datetime:Y-m-d H:i:s',
+        'end' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
      * Get the formatted start and end dates.
-     *
-     * @return string
      */
     public function getFormattedDateAttribute(): string
     {
@@ -51,8 +49,6 @@ class Booking extends Model
 
     /**
      * Get the client associated with the booking.
-     *
-     * @return BelongsTo
      */
     public function client(): BelongsTo
     {

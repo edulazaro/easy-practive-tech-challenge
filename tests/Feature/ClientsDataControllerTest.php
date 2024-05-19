@@ -2,14 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
-
 class ClientsDataControllerTest extends TestCase
-{ 
+{
     use RefreshDatabase;
 
     /**
@@ -21,9 +19,11 @@ class ClientsDataControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->postJson(route('data.clients.store'), []);
-    
-        $response->assertStatus(422)->assertJsonValidationErrors(['name', 'email']);
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.store'), []);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['name', 'email']);
     }
 
     /**
@@ -34,12 +34,13 @@ class ClientsDataControllerTest extends TestCase
     public function test_store_method_fails_with_an_invalid_email()
     {
         $user = User::factory()->create();
-    
-        $response = $this->actingAs($user)->postJson(route('data.clients.store'), [
-            'name' => 'Edu',
-            'email' => 'test@test'
-        ]);
-    
+
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.store'), [
+                'name' => 'Edu',
+                'email' => 'test@test',
+            ]);
+
         $response->assertStatus(422)->assertJsonValidationErrors(['email']);
     }
 
@@ -51,12 +52,13 @@ class ClientsDataControllerTest extends TestCase
     public function test_store_method_fails_with_an_invalid_phone()
     {
         $user = User::factory()->create();
-    
-        $response = $this->actingAs($user)->postJson(route('data.clients.store'), [
-            'name' => 'Edu',
-            'phone' => '4653asdsad'
-        ]);
-    
+
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.store'), [
+                'name' => 'Edu',
+                'phone' => '4653asdsad',
+            ]);
+
         $response->assertStatus(422)->assertJsonValidationErrors(['phone']);
     }
 
@@ -74,24 +76,25 @@ class ClientsDataControllerTest extends TestCase
             'phone' => '+34 324343243',
             'address' => 'Whatever streent',
             'city' => 'Anywhere',
-            'postcode' => '32004'
+            'postcode' => '32004',
         ];
 
-        $response = $this->actingAs($user)->postJson(route('data.clients.store'), $clientData);
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.store'), $clientData);
 
         $response->assertStatus(201)
-        ->assertJson([
-            'success' => true,
-            'message' => 'The client was successfully created.',
-            'data' => [
-                'name' => $clientData['name'],
-                'email' => $clientData['email'],
-                'phone' => $clientData['phone'],
-                'address' => $clientData['address'],
-                'city' => $clientData['city'],
-                'postcode' => $clientData['postcode'],
-            ]
-        ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'The client was successfully created.',
+                'data' => [
+                    'name' => $clientData['name'],
+                    'email' => $clientData['email'],
+                    'phone' => $clientData['phone'],
+                    'address' => $clientData['address'],
+                    'city' => $clientData['city'],
+                    'postcode' => $clientData['postcode'],
+                ],
+            ]);
 
         $this->assertDatabaseHas('clients', [
             'name' => $clientData['name'],
@@ -100,7 +103,7 @@ class ClientsDataControllerTest extends TestCase
             'address' => $clientData['address'],
             'city' => $clientData['city'],
             'postcode' => $clientData['postcode'],
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     }
 
@@ -109,7 +112,7 @@ class ClientsDataControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_store_method_creates_client_successfully_with_only_email()
+    public function test_store_method_creates_client_with_only_email()
     {
         $user = User::factory()->create();
         $clientData = [
@@ -117,22 +120,23 @@ class ClientsDataControllerTest extends TestCase
             'email' => 'test@test.com',
         ];
 
-        $response = $this->actingAs($user)->postJson(route('data.clients.store'), $clientData);
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.store'), $clientData);
 
         $response->assertStatus(201)
-        ->assertJson([
-            'success' => true,
-            'message' => 'The client was successfully created.',
-            'data' => [
-                'name' => $clientData['name'],
-                'email' => $clientData['email'],
-            ]
-        ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'The client was successfully created.',
+                'data' => [
+                    'name' => $clientData['name'],
+                    'email' => $clientData['email'],
+                ],
+            ]);
 
         $this->assertDatabaseHas('clients', [
             'name' => $clientData['name'],
             'email' => $clientData['email'],
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     }
 
@@ -141,7 +145,7 @@ class ClientsDataControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_store_method_creates_client_successfully_with_only_phone()
+    public function test_store_method_creates_client_with_only_phone()
     {
         $user = User::factory()->create();
         $clientData = [
@@ -149,22 +153,23 @@ class ClientsDataControllerTest extends TestCase
             'phone' => '+34 324343243',
         ];
 
-        $response = $this->actingAs($user)->postJson(route('data.clients.store'), $clientData);
+        $response = $this->actingAs($user)
+            ->postJson(route('data.clients.store'), $clientData);
 
         $response->assertStatus(201)
-        ->assertJson([
-            'success' => true,
-            'message' => 'The client was successfully created.',
-            'data' => [
-                'name' => $clientData['name'],
-                'phone' => $clientData['phone'],
-            ]
-        ]);
+            ->assertJson([
+                'success' => true,
+                'message' => 'The client was successfully created.',
+                'data' => [
+                    'name' => $clientData['name'],
+                    'phone' => $clientData['phone'],
+                ],
+            ]);
 
         $this->assertDatabaseHas('clients', [
             'name' => $clientData['name'],
             'phone' => $clientData['phone'],
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     }
 }
