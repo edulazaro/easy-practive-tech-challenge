@@ -42,9 +42,10 @@ Complete as many as you can. If you got some time left, there's BONUS tasks, but
 1. Clone the repository.
 2. Copy the `.env.docker.example` file, rename it as `.env.docker` and add the `ALPHA_VANTAGE_API_KEY`.
 3. Start all the services defined with Docker Compose witht he command `docker-compose up -d`.
-2. If the `vendor` folder is not created, run `docker-compose exec -it app composer install`.
-3. If the `node-modules` folder is not created, run `docker-compose exec -it app npm install`.
-5. The app will be running on `http://localhost:7000/`. 
+4. If the `vendor` folder is not created, run `docker-compose exec -it app composer install`.
+5. Run this command `docker-compose exec -it app php artisan key:generate`.
+6. If the `node-modules` folder is not created, run `docker-compose exec -it app npm install`.
+7. The app will be running on `http://localhost:7000/`. 
 
 To run the migrations, execute these commands:
 
@@ -66,6 +67,10 @@ Testing with Docker
 ```php
 `docker-compose exec app php artisan test`
 ```
+
+## Known issues
+
+There's a compilation issue. To sort it, Bootstrap must be updated to version 5, or Bootstrap can be removed to use only Tawilwind. If keeping both, Tailwind can use a prefix to avoid collisions.
 
 ## Thank You!
 
