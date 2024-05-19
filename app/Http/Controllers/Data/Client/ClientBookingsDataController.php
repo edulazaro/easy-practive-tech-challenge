@@ -22,7 +22,7 @@ class ClientBookingsDataController extends Controller
 
         $query = $client->bookings();
 
-        switch (request()->filter) {
+        switch (request()->when) {
             case 'past':
                 $query->where('start', '<', now());
                 break;

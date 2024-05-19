@@ -78,7 +78,7 @@ class ClientBookingsDataControllerTest extends TestCase
 
         $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', [
             'client' => $client->id,
-            'filter' => 'past'
+            'when' => 'past'
         ]));
 
         $response->assertStatus(200);
@@ -111,7 +111,7 @@ class ClientBookingsDataControllerTest extends TestCase
 
         $response = $this->actingAs($user)->getJson(route('data.clients.bookings.index', [
             'client' => $client->id,
-            'filter' => 'future'
+            'when' => 'future'
         ]));
 
         $response->assertStatus(200);

@@ -3,7 +3,7 @@
         <div class="pb-3 border-b border-gray-200 mb-6">
             <div class="mx-auto">
                 <h1
-                    class="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl"
+                    class="text-lg font-semibold text-gray-900 sm:text-xl"
                 >
                     <span class="inline">Clients</span>
                     <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" class="inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2" data-testid="flowbite-breadcrumb-separator" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -20,30 +20,36 @@
                     class="w-full bg-white rounded p-4 border border-gray-200 rounded-md"
                 >
                     <h2>Client Info</h2>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th class="text-gray-600 pr-3">Name</th>
-                                <td>{{ client.name }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-gray-600 pr-3">Email</th>
-                                <td>{{ client.email }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-gray-600 pr-3">Phone</th>
-                                <td>{{ client.phone }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-gray-600 pr-3">Address</th>
-                                <td>
-                                    {{ client.address }}<br />{{
-                                        client.postcode + " " + client.city
-                                    }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="flex items-center mb-2 text-sm">
+                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                            Name
+                        </div>
+                        <div>{{ client.name }}</div>
+                    </div>
+                    <div class="flex items-center mb-2 text-sm text-sm">
+                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                            Email
+                        </div>
+                        <div>{{ client.email ? client.email : '-' }}</div>
+                    </div>
+                    <div class="flex items-center mb-2 text-sm">
+                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                            Phone
+                        </div>
+                        <div>{{ client.phone ? client.phone : '-'  }}</div>
+                    </div>
+                    <div class="flex items-center mb-2 text-sm">
+                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                            Address
+                        </div>
+                        <div>
+                            <span >{{ client.address }}<br/></span>
+        
+                            {{ client.postcode ? client.postcode : '' }}
+                            {{ client.city ? (' ' + client.city) : '' }}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -181,7 +187,7 @@ export default {
                         client: this.client.id,
                     }),
                     {
-                        params: { filter: this.bookingFilter },
+                        params: { when: this.bookingFilter },
                     }
                 )
                 .then((response) => {

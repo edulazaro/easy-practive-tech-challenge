@@ -28,7 +28,7 @@
                             >
                                 <td class="px-4 py-2">{{ journal.date }}</td>
                                 <td class="px-4 py-2">{{ journal.excerpt }}</td>
-                                <td class="px-4 py-2">
+                                <td class="px-4 py-2 space-x-2">
                                     <button
                                         class="btn btn-primary btn-sm"
                                         @click="selectJournal(journal)"
