@@ -24,10 +24,10 @@ class Booking extends Model
         'notes',
     ];
 
-     /** @var array<string> Attributes mutated to dates. */
-    protected array $dates = [
-        'start',
-        'end',
+    /** @var array<string> The attributes that should be casted. */
+    protected $casts = [
+        'start' => 'datetime',
+        'end' => 'datetime',
     ];
 
     /**
