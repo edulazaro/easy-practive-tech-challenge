@@ -1,5 +1,6 @@
 <template>
     <div>
+       
         <new-journal-modal
             :client="client"
             @added-client-journal="getJournals"
@@ -63,6 +64,7 @@
 
 <script>
 import axios from "axios";
+import { inject } from 'vue';
 
 export default {
     name: "ClientJournals",
@@ -70,6 +72,10 @@ export default {
     props: {
         client: Object,
         journals: Array,
+    },
+
+    mounted() {
+        this.toast = inject('toast');
     },
 
     data() {
@@ -92,7 +98,7 @@ export default {
                     })
                 )
                 .then((response) => {
-                    this.journalsList = response.data;
+                    this.journalsList = response.data.collection;
                 })
                 .catch((error) => {
                     console.error(
@@ -114,10 +120,19 @@ export default {
             axios
                 .delete(route("data.journals.destroy", { journal: journal.id }))
                 .then(() => {
+                    this.toast.success({
+                        title: 'Success!',
+                        message: 'The journal was correctly deleted',
+                        delay: 5000
+                    });
                     this.getJournals();
                 })
                 .catch((error) => {
-                    console.error("Failed to delete journal:", error);
+                    this.toast.error({
+                        title: 'Success!',
+                        message: 'Failed to delete journal: ' + error.message,
+                        delay: 5000
+                    });
                 });
         },
     },

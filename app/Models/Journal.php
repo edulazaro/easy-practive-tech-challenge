@@ -16,6 +16,11 @@ class Journal extends Model
         'formatted_date',
     ];
 
+    /** @var array The attributes that should be casted. */
+    protected $casts = [
+        'date' => 'datetime:Y-m-d',
+    ];
+
     /**
      * Get the client associated with the journal.
      *

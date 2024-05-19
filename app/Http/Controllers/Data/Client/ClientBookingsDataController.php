@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\JsonResponse;
+
+
+use App\Models\Client;
 
 class ClientBookingsDataController extends Controller
 {
@@ -29,8 +31,11 @@ class ClientBookingsDataController extends Controller
                 break;
         }
 
-        $query->orderBy('start', 'ASC');
+        $collection = $query->orderBy('start', 'ASC')->get();
 
-        return response()->json($query->get());
+        return response()->json([
+            'success' => true,
+            'collection' => $collection
+        ]);
     }
 }

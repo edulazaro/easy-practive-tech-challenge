@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\JsonResponse;
+
 use App\Models\Client;
 use App\Models\Journal;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Gate;
 
 class ClientJournalsDataController extends Controller
 {
@@ -19,9 +20,12 @@ class ClientJournalsDataController extends Controller
     {
         Gate::authorize('manage-client', $client);
 
-        $query = $client->journals()->orderBy('date', 'ASC');
+        $collection = $client->journals()->orderBy('date', 'ASC')->get();
 
-        return response()->json($query->get());
+        return response()->json([
+            'success' => true,
+            'collection' => $collection
+        ]);
     }
 
     /**

@@ -114,11 +114,16 @@
 
 <script>
 import axios from "axios";
+import { inject } from 'vue';
 
 export default {
     name: "NewJournalModal",
 
     props: ["client"],
+
+    mounted() {
+        this.toast = inject('toast');
+    },
 
     data() {
         return {
@@ -157,9 +162,23 @@ export default {
                 )
                 .then((data) => {
                     this.closeModal();
+
+                    this.toast.success({
+                        title: 'Success!',
+                        message: 'The journal was correctly created.',
+                        delay: 5000
+                    });
+
                     this.$emit("added-client-journal");
                 })
                 .catch((error) => {
+
+                    this.toast.error({
+                        title: 'Error!',
+                        message: 'It was not possible to create the journal. Plese check the fields.',
+                        delay: 5000
+                    });
+
                     this.errors = error.response.data.errors;
                 });
         },

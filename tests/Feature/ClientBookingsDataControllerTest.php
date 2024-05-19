@@ -33,7 +33,7 @@ class ClientBookingsDataControllerTest extends TestCase
     }
 
     /**
-     * Test that a user can get the bookings of of of his clients
+     * Test that a user can get the bookings of his clients
      */
     public function test_authorized_user_can_get_client_bookings()
     {
@@ -52,11 +52,15 @@ class ClientBookingsDataControllerTest extends TestCase
             ]));
 
         $response->assertStatus(200);
-        $response->assertJsonCount($bookings->count());
+
+        $response->assertJsonFragment([
+            'success' => true,
+            'collection' => $bookings->toArray()
+        ]);
     }
 
     /**
-     * Test that a user can get the past bookings of of of his clients
+     * Test that a user can get the past bookings of his clients
      */
     public function test_authorized_user_can_get_past_client_bookings()
     {
@@ -84,15 +88,24 @@ class ClientBookingsDataControllerTest extends TestCase
             ]));
 
         $response->assertStatus(200);
-        $response->assertJsonCount($pastBookings->count());
 
-        $response->assertJsonFragment([
-            'start' => $dateBeforeNow->toDateTimeString()
+        $response->assertJson([
+            'success' => true,
         ]);
+
+        $response->assertJsonCount(3, 'collection');
+
+        foreach ($pastBookings as $booking) {
+            $response->assertJsonFragment([
+                'id' => $booking->id,
+                'start' => $booking->start->format('Y-m-d H:i:s'),
+                'client_id' => $client->id
+            ]);
+        }
     }
 
     /**
-     * Test that a user can get the past bookings of of of his clients
+     * Test that a user can get the FUTURE bookings of his clients
      */
     public function test_authorized_user_can_get_future_client_bookings()
     {
@@ -120,10 +133,25 @@ class ClientBookingsDataControllerTest extends TestCase
             ]));
 
         $response->assertStatus(200);
-        $response->assertJsonCount($futureBookings->count());
-        $response->assertJsonFragment([
-            'start' => $dateAfterNow->toDateTimeString(),
+
+        $response->assertJson([
+            'success' => true,
         ]);
+
+        $response->assertJsonCount(2, 'collection');
+
+        $response->assertJsonFragment([
+            'success' => true,
+            'collection' => $futureBookings->toArray()
+        ]);
+
+        foreach ($futureBookings as $booking) {
+            $response->assertJsonFragment([
+                'id' => $booking->id,
+                'start' => $booking->start->format('Y-m-d H:i:s'),
+                'client_id' => $client->id
+            ]);
+        }
     }
 
     /**
@@ -153,7 +181,7 @@ class ClientBookingsDataControllerTest extends TestCase
                 'client' => $client->id,
             ]));
 
-        $bookings = $response->json();
+        $bookings = $response->json(['collection']);
 
         $this->assertEquals(
             $dateTomorrow->toDateTimeString(),

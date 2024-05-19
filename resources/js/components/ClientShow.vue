@@ -1,12 +1,21 @@
 <template>
     <div>
-        <div class="pb-3 border-b border-gray-200 mb-6">
+        <div class="py-3 border-b border-gray-200 mb-6">
             <div class="mx-auto">
-                <h1
-                    class="text-lg font-semibold text-gray-900 sm:text-xl"
-                >
+                <h1 class="text-lg font-semibold text-gray-900 sm:text-xl mb-0">
                     <span class="inline">Clients</span>
-                    <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" class="inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2" data-testid="flowbite-breadcrumb-separator" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        class="inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2"
+                        data-testid="flowbite-breadcrumb-separator"
+                        height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                     <span class="inline">{{ client.name }}</span>
@@ -165,11 +174,16 @@
 
 <script>
 import axios from "axios";
+import { inject } from 'vue';
 
 export default {
     name: "ClientShow",
 
     props: ["client"],
+
+    mounted() {
+        this.toast = inject('toast');
+    },
 
     data() {
         return {
@@ -191,7 +205,7 @@ export default {
                     }
                 )
                 .then((response) => {
-                    this.bookings = response.data;
+                    this.bookings = response.data.collection;
                 })
                 .catch((error) => {
                     console.error(
@@ -209,6 +223,12 @@ export default {
             axios.delete(
                 route("data.bookings.destroy", { booking: booking.id })
             );
+
+            this.toast.success({
+                title: 'Success!',
+                message: 'The booking was correctly deleted',
+                delay: 5000
+            });
 
             this.getBookings();
         },

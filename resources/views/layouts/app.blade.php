@@ -22,6 +22,7 @@
 </head>
 <body>
     <div id="app">
+        <flash-toast position="top-right"></flash-toast>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid max-w-screen-2xl mx-auto">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -77,7 +78,7 @@
             </div>
         </nav>
 
-        <main class="py-4 max-w-screen-2xl mx-auto">
+        <div class="items-center justify-center">
             @yield('content')
         </main>
     </div>

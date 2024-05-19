@@ -93,9 +93,14 @@
 
 <script>
 import axios from "axios";
+import { inject } from 'vue';
 
 export default {
     name: "ClientForm",
+
+    mounted() {
+        this.toast = inject('toast');
+    },
 
     data() {
         return {
@@ -115,10 +120,17 @@ export default {
         storeClient() {
             axios
                 .post(route("data.clients.store"), this.client)
-                .then((data) => {
-                    window.location.href = route('clients.show', { client: data.data.data.id});
+                .then((response) => {
+                    window.location.href = route('clients.show', { client: response.data.data.id});
                 })
                 .catch((error) => {
+
+                    this.toast.error({
+                        title: 'Error!',
+                        message: 'The client was not created. Please check the fields.',
+                        delay: 5000
+                    });
+
                     this.errors = error.response.data.errors;
                 });
         },

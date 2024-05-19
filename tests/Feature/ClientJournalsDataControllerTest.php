@@ -52,7 +52,11 @@ class ClientJournalsDataControllerTest extends TestCase
             ]));
 
         $response->assertStatus(200);
-        $response->assertJsonCount($journals->count());
+
+        $response->assertJsonFragment ([
+            'success' => true,
+            'collection' => $journals->toArray() 
+        ]);
     }
 
     /**

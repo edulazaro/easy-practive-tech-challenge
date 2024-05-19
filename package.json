@@ -25,6 +25,7 @@
         "vue-loader": "^17.4.2"
     },
     "dependencies": {
+        "@alamtheinnov/flashtoast": "^0.0.6",
         "click-outside-vue3": "^4.0.1",
         "mix-tailwindcss": "^1.3.0",
         "tailwindcss": "^2.1.4"

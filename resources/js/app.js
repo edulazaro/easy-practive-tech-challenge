@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 import { ZiggyVue  } from '../../vendor/tightenco/ziggy';
+import { flashToast } from '@alamtheinnov/flashtoast';
 import vClickOutside from "click-outside-vue3"
 import { createApp } from 'vue';
 
@@ -18,9 +19,10 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 app.use(vClickOutside)
+app.use(flashToast)
 app.use(ZiggyVue);
 
-/**
+/**i
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
@@ -35,7 +37,6 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import ClientsList from './components/ClientsList.vue';
 import ClientForm from './components/ClientForm.vue';
 import ClientShow from './components/ClientShow.vue';
-
 import ClientJournals from './components/ClientJournals.vue';
 import NewJournalModal from './components/NewJournalModal.vue';
 import ViewJournalModal from './components/ViewJournalModal.vue';
@@ -47,4 +48,6 @@ app.component('client-show', ClientShow);
 app.component('client-journals', ClientJournals);
 app.component('new-journal-modal', NewJournalModal);
 app.component('view-journal-modal', ViewJournalModal);
+
+
 app.mount('#app');
