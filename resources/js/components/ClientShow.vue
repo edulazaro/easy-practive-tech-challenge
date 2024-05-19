@@ -1,6 +1,18 @@
 <template>
     <div>
-        <h1 class="mb-6">Clients -> {{ client.name }}</h1>
+        <div class="pb-3 border-b border-gray-200 mb-6">
+            <div class="mx-auto">
+                <h1
+                    class="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl"
+                >
+                    <span class="inline">Clients</span>
+                    <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" class="inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2" data-testid="flowbite-breadcrumb-separator" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <span class="inline">{{ client.name }}</span>
+                </h1>
+            </div>
+        </div>
 
         <div class="grid md:grid-cols-3 gap-5">
             <div>

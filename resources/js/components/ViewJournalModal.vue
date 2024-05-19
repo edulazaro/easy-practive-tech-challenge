@@ -10,10 +10,10 @@
                     class="relative bg-white rounded-lg shadow"
                 >
                     <div
-                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+                        class="flex items-center justify-between p-4 border-b rounded-t"
                     >
                         <h3
-                            class="text-xl font-semibold text-gray-900"
+                            class="text-xl font-semibold text-gray-900 mb-0"
                         >
                             Viewin Journal
                         </h3>

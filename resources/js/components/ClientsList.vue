@@ -1,9 +1,11 @@
 <template>
     <div>
-        <h1>
-            Clients
-            <a href="/clients/create" class="float-right btn btn-primary">+ New Client</a>
-        </h1>
+        <div class="pb-3 border-b border-gray-200 mb-6">
+            <div class="mx-auto flex justify-between items-center w-full">
+                <h1 class="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl">Clients</h1>
+                <a href="/clients/create" class="btn btn-primary">+ New Client</a>
+            </div>
+        </div>
 
         <table class="table">
             <thead>
@@ -22,8 +24,17 @@
                     <td>{{ client.phone }}</td>
                     <td>{{ client.bookings_count }}</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" :href="`/clients/${client.id}`">View</a>
-                        <button class="btn btn-danger btn-sm" @click="deleteClient(client)">Delete</button>
+                        <a
+                            class="btn btn-primary btn-sm"
+                            :href="`/clients/${client.id}`"
+                            >View</a
+                        >
+                        <button
+                            class="btn btn-danger btn-sm"
+                            @click="deleteClient(client)"
+                        >
+                            Delete
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -32,30 +43,39 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-    name: 'ClientsList',
+    name: "ClientsList",
 
-    props: ['clients'],
+    props: ["clients"],
 
     data() {
         return {
-            clientsList: this.clients
+            clientsList: this.clients,
         };
     },
 
     methods: {
         deleteClient(client) {
-            axios.delete(route('data.clients.destroy', { 
-                client: client.id
-            })).then(response => {
-                this.clientsList = this.clientsList.filter(clientToCheck => clientToCheck.id !== client.id);
-            })
-            .catch(error => {
-                console.error('There was an error deleting the client:', error);
-            });
-        }
-    }
-}
+            axios
+                .delete(
+                    route("data.clients.destroy", {
+                        client: client.id,
+                    })
+                )
+                .then((response) => {
+                    this.clientsList = this.clientsList.filter(
+                        (clientToCheck) => clientToCheck.id !== client.id
+                    );
+                })
+                .catch((error) => {
+                    console.error(
+                        "There was an error deleting the client:",
+                        error
+                    );
+                });
+        },
+    },
+};
 </script>
