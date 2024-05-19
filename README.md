@@ -34,8 +34,38 @@ Complete as many as you can. If you got some time left, there's BONUS tasks, but
 - [X] (FEATURE) Users want a quick way to see future and past bookings. When viewing client bookings, can you make a dropdown with three values - "All bookings", "Future bookings only" and "Past bookings only". Make it so that selecting an item from the dropdown would only show bookings that apply to the selected filter. When the page loads, default to "All bookings".
 
 **BONUS TASKS!**
-- [ ] *BONUS:* (FEATURE) Users have requested the ability to write journals for their clients. A Journal should have a date field (without hours/minutes) and a text field (unlimited length). A client can have many journals. A user should be able to view, create and delete journals.
-- [ ] *BONUS:* (REFACTOR) We strive for fast and readable code that follows Laravel's/Vue.js style and best practices. Take the time remaining and refactor any code you think can be improved, including ours. The goal is to leave the code better than you found it ;)
+- [X] *BONUS:* (FEATURE) Users have requested the ability to write journals for their clients. A Journal should have a date field (without hours/minutes) and a text field (unlimited length). A client can have many journals. A user should be able to view, create and delete journals.
+- [X] *BONUS:* (REFACTOR) We strive for fast and readable code that follows Laravel's/Vue.js style and best practices. Take the time remaining and refactor any code you think can be improved, including ours. The goal is to leave the code better than you found it ;)
+
+## Running with docker
+
+1. Clone the repository.
+2. Copy the `.env.docker.example` file, rename it as `.env.docker` and add the `ALPHA_VANTAGE_API_KEY`.
+3. Start all the services defined with Docker Compose witht he command `docker-compose up -d`.
+2. If the `vendor` folder is not created, run `docker-compose exec -it app composer install`.
+3. If the `node-modules` folder is not created, run `docker-compose exec -it app npm install`.
+5. The app will be running on `http://localhost:7000/`. 
+
+To run the migrations, execute these commands:
+
+1. Run the migrations with the command `docker-compose exec app php artisan migrate`.
+2. Run the seeders with the commad `docker-compose exec app php artisan db:seed`.
+
+You will be able to login with `test@example.com` and `password`.
+
+## Testing
+
+Run this command:
+
+```php
+php artisan test
+```
+
+Testing with Docker
+
+```php
+`docker-compose exec app php artisan test`
+```
 
 ## Thank You!
 
