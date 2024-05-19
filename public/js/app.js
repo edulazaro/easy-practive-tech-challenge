@@ -20439,7 +20439,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     journals: Array
   },
   mounted: function mounted() {
-    this.toast = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)('toast');
+    this.toast = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)("toast");
   },
   data: function data() {
     return {
@@ -20473,15 +20473,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         journal: journal.id
       })).then(function () {
         _this2.toast.success({
-          title: 'Success!',
-          message: 'The journal was correctly deleted',
+          title: "Success!",
+          message: "The journal was correctly deleted",
           delay: 5000
         });
         _this2.getJournals();
       })["catch"](function (error) {
         _this2.toast.error({
-          title: 'Success!',
-          message: 'Failed to delete journal: ' + error.message,
+          title: "Success!",
+          message: "Failed to delete journal: " + error.message,
           delay: 5000
         });
       });
@@ -20511,7 +20511,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "ClientShow",
   props: ["client"],
   mounted: function mounted() {
-    this.toast = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)('toast');
+    this.toast = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)("toast");
   },
   data: function data() {
     return {
@@ -20543,8 +20543,8 @@ __webpack_require__.r(__webpack_exports__);
         booking: booking.id
       }));
       this.toast.success({
-        title: 'Success!',
-        message: 'The booking was correctly deleted',
+        title: "Success!",
+        message: "The booking was correctly deleted",
         delay: 5000
       });
       this.getBookings();
@@ -20608,6 +20608,84 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewBookingModal.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewBookingModal.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "NewBoookingModal",
+  props: ["client"],
+  mounted: function mounted() {
+    this.toast = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)('toast');
+  },
+  data: function data() {
+    return {
+      isShowModal: false,
+      errors: {},
+      booking: {
+        start: this.formatTodayDate(),
+        end: this.formatTodayDate(1),
+        notes: ""
+      }
+    };
+  },
+  methods: {
+    closeModal: function closeModal() {
+      this.isShowModal = false;
+    },
+    showModal: function showModal() {
+      this.isShowModal = true;
+    },
+    formatTodayDate: function formatTodayDate() {
+      var addHours = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var today = new Date();
+      today.setHours(today.getHours() + addHours); // Add hours to the current time
+
+      var year = today.getFullYear();
+      var month = (today.getMonth() + 1).toString().padStart(2, '0');
+      var day = today.getDate().toString().padStart(2, '0');
+      var hours = today.getHours().toString().padStart(2, '0');
+      var minutes = today.getMinutes().toString().padStart(2, '0');
+      return "".concat(year, "-").concat(month, "-").concat(day, "T").concat(hours, ":").concat(minutes);
+    },
+    storeBooking: function storeBooking() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(route("data.clients.bookings.store", {
+        client: this.client.id
+      }), this.booking).then(function (data) {
+        _this.closeModal();
+        _this.toast.success({
+          title: 'Success!',
+          message: 'The booking was correctly created.',
+          delay: 5000
+        });
+        _this.$emit("added-client-booking");
+      })["catch"](function (error) {
+        _this.toast.error({
+          title: 'Error!',
+          message: 'It was not possible to create the booking. Plese check the fields.',
+          delay: 5000
+        });
+        _this.errors = error.response.data.errors;
+      });
+    }
   }
 });
 
@@ -20696,7 +20774,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ViewJournalModal",
-  props: ['client', 'journal'],
+  props: ["client", "journal"],
   data: function data() {
     return {
       isShowModal: false,
@@ -20706,7 +20784,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     closeModal: function closeModal() {
       this.isShowModal = false;
-      this.$emit('unselect-client-journal');
+      this.$emit("unselect-client-journal");
     },
     showModal: function showModal() {
       this.isShowModal = true;
@@ -20729,15 +20807,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"pb-3 border-b border-gray-200 mb-6\"><div class=\"mx-auto\"><h1 class=\"text-lg font-semibold text-gray-900 dark:text-white sm:text-xl\"><span class=\"inline\">Clients</span><svg stroke=\"currentColor\" fill=\"none\" stroke-width=\"0\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2\" data-testid=\"flowbite-breadcrumb-separator\" height=\"1em\" width=\"1em\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\"></path></svg><span class=\"inline\">Add New Client</span></h1></div></div>", 1);
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"py-3 border-b border-gray-200 mb-6\"><div class=\"mx-auto\"><h1 class=\"text-lg font-semibold text-gray-900 sm:text-xl mb-0\"><span class=\"inline\">Clients</span><svg stroke=\"currentColor\" fill=\"none\" stroke-width=\"0\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2\" data-testid=\"flowbite-breadcrumb-separator\" height=\"1em\" width=\"1em\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\"></path></svg><span class=\"inline\">Add New Client</span></h1></div></div>", 1);
 var _hoisted_2 = {
-  "class": "max-w-lg mx-auto"
+  "class": "w-full bg-white rounded p-4 border border-gray-200 rounded-md max-w-lg mx-auto"
 };
 var _hoisted_3 = {
   "class": "form-group"
 };
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "name"
+  "for": "name",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Name", -1 /* HOISTED */);
 var _hoisted_5 = {
   key: 0,
@@ -20747,7 +20826,8 @@ var _hoisted_6 = {
   "class": "form-group"
 };
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "email"
+  "for": "email",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Email", -1 /* HOISTED */);
 var _hoisted_8 = {
   key: 0,
@@ -20757,7 +20837,8 @@ var _hoisted_9 = {
   "class": "form-group"
 };
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "phone"
+  "for": "phone",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Phone", -1 /* HOISTED */);
 var _hoisted_11 = {
   key: 0,
@@ -20767,30 +20848,30 @@ var _hoisted_12 = {
   "class": "form-group"
 };
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "name"
+  "for": "name",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Address", -1 /* HOISTED */);
 var _hoisted_14 = {
-  "class": "flex"
+  "class": "block lg:flex lg:space-x-4"
 };
 var _hoisted_15 = {
   "class": "form-group flex-1"
 };
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "city"
+  "for": "city",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "City", -1 /* HOISTED */);
 var _hoisted_17 = {
   "class": "form-group flex-1"
 };
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "postcode"
+  "for": "postcode",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Postcode", -1 /* HOISTED */);
 var _hoisted_19 = {
   "class": "text-right"
 };
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "/clients",
-  "class": "btn btn-default"
-}, "Cancel", -1 /* HOISTED */);
+var _hoisted_20 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$data$errors, _$data$errors2, _$data$errors3;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -20835,7 +20916,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.client.postcode = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.client.postcode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.client.postcode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: _ctx.route('clients.index'),
+    "class": "mr-2 btn btn-default rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100"
+  }, " Cancel ", 8 /* PROPS */, _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[6] || (_cache[6] = function () {
       return $options.storeClient && $options.storeClient.apply($options, arguments);
     }),
@@ -20859,73 +20943,95 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  "class": "border-b border-gray-200 mb-6"
+};
+var _hoisted_2 = {
+  "class": "mx-auto md:flex justify-between items-center w-full"
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-3 md:mb-0"
+}, "List of client journals", -1 /* HOISTED */);
+var _hoisted_4 = {
   key: 0,
   "class": "w-full"
 };
-var _hoisted_2 = {
+var _hoisted_5 = {
   "class": "w-full"
 };
-var _hoisted_3 = {
+var _hoisted_6 = {
   "class": "bg-white rounded mt-4"
 };
-var _hoisted_4 = {
+var _hoisted_7 = {
   key: 0
 };
-var _hoisted_5 = {
+var _hoisted_8 = {
   "class": "w-full text-sm text-left text-gray-700"
 };
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
   "class": "text-xs text-gray-700 uppercase bg-gray-50"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "px-4 py-2"
-}, "Time"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "px-4 py-2"
-}, "Content"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "px-4 py-2"
+  "class": "px-2 py-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "hidden lg:inline-block"
+}, "Time"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "lg:hidden"
+}, "Booking")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "px-2 py-2 hidden lg:table-cell"
+}, " Content "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "px-2 py-2"
 }, "Actions")])], -1 /* HOISTED */);
-var _hoisted_7 = {
-  "class": "px-4 py-2"
+var _hoisted_10 = {
+  "class": "px-2 py-2"
 };
-var _hoisted_8 = {
-  "class": "px-4 py-2"
+var _hoisted_11 = {
+  "class": "lg:hidden"
 };
-var _hoisted_9 = {
-  "class": "px-4 py-2 space-x-2"
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "font-semibold"
+}, "Content: ", -1 /* HOISTED */);
+var _hoisted_13 = {
+  "class": "text-gray-500"
 };
-var _hoisted_10 = ["onClick"];
-var _hoisted_11 = ["onClick"];
-var _hoisted_12 = {
+var _hoisted_14 = {
+  "class": "px-2 py-2 hidden lg:table-cell"
+};
+var _hoisted_15 = {
+  "class": "px-2 py-2 space-y-1 xl:space-y-0 xl:space-x-1 xl:space-x-2"
+};
+var _hoisted_16 = ["onClick"];
+var _hoisted_17 = ["onClick"];
+var _hoisted_18 = {
   key: 1
 };
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-center"
 }, "The client has no journals.", -1 /* HOISTED */);
-var _hoisted_14 = [_hoisted_13];
+var _hoisted_20 = [_hoisted_19];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_new_journal_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("new-journal-modal");
   var _component_view_journal_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("view-journal-modal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_new_journal_modal, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_new_journal_modal, {
     client: $props.client,
     onAddedClientJournal: $options.getJournals
-  }, null, 8 /* PROPS */, ["client", "onAddedClientJournal"]), $data.selectedJournal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_view_journal_modal, {
+  }, null, 8 /* PROPS */, ["client", "onAddedClientJournal"])])]), $data.selectedJournal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_view_journal_modal, {
     journal: $data.selectedJournal,
     onUnselectClientJournal: $options.unSelectJournal
-  }, null, 8 /* PROPS */, ["journal", "onUnselectClientJournal"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$data.journalsList && $data.journalsList.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.journalsList, function (journal) {
+  }, null, 8 /* PROPS */, ["journal", "onUnselectClientJournal"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$data.journalsList && $data.journalsList.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.journalsList, function (journal) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       "class": "border-b",
       key: journal.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(journal.formatted_date), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(journal.excerpt), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      "class": "btn btn-primary btn-sm",
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(journal.formatted_date) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(journal.excerpt), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(journal.excerpt), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "btn btn-primary btn-sm block w-full xl:w-auto xl:inline-block",
       onClick: function onClick($event) {
         return $options.selectJournal(journal);
       }
-    }, " View ", 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      "class": "btn btn-danger btn-sm",
+    }, " View ", 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "btn btn-danger btn-sm block w-full xl:w-auto xl:inline-block",
       onClick: function onClick($event) {
         return $options.deleteJournal(journal);
       }
-    }, " Delete ", 8 /* PROPS */, _hoisted_11)])]);
-  }), 128 /* KEYED_FRAGMENT */))])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [].concat(_hoisted_14)))])])]);
+    }, " Delete ", 8 /* PROPS */, _hoisted_17)])]);
+  }), 128 /* KEYED_FRAGMENT */))])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [].concat(_hoisted_20)))])])]);
 }
 
 /***/ }),
@@ -21011,86 +21117,109 @@ var _hoisted_19 = {
   "class": "md:col-span-2"
 };
 var _hoisted_20 = {
+  "class": "flex flex-wrap text-sm text-center text-gray-500 border-b border-gray-200 pb-0 space-x-1"
+};
+var _hoisted_21 = {
+  "class": "me-4"
+};
+var _hoisted_22 = {
+  "class": "me-4"
+};
+var _hoisted_23 = {
   key: 0,
   "class": "w-full bg-white rounded p-4 border border-gray-200 rounded-md"
 };
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-  "class": "mb-3"
+var _hoisted_24 = {
+  "class": "border-b border-gray-200 mb-6"
+};
+var _hoisted_25 = {
+  "class": "mx-auto md:flex justify-between items-center w-full"
+};
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-3 md:mb-0"
 }, "List of client bookings", -1 /* HOISTED */);
-var _hoisted_22 = {
+var _hoisted_27 = {
   "class": "form-group"
 };
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "bookingFilter"
 }, "Filter Bookings:", -1 /* HOISTED */);
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "all"
 }, "All bookings", -1 /* HOISTED */);
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "past"
 }, "Past bookings only", -1 /* HOISTED */);
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "future"
 }, "Future bookings only", -1 /* HOISTED */);
-var _hoisted_27 = [_hoisted_24, _hoisted_25, _hoisted_26];
-var _hoisted_28 = {
+var _hoisted_32 = [_hoisted_29, _hoisted_30, _hoisted_31];
+var _hoisted_33 = {
   key: 0,
   "class": "w-full text-sm text-left text-gray-700"
 };
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
   "class": "text-xs text-gray-700 uppercase bg-gray-50"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "px-4 py-2"
-}, "Time"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "px-4 py-2 hidden md:table-cell"
+  "class": "px-2 py-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "hidden md:inline-block"
+}, "Time"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "md:hidden"
+}, "Booking")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "px-2 py-2 hidden md:table-cell"
 }, " Notes "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "px-4 py-2"
+  "class": "px-2 py-2"
 }, "Actions")])], -1 /* HOISTED */);
-var _hoisted_30 = {
-  "class": "px-4 py-2"
+var _hoisted_35 = {
+  "class": "px-2 py-2"
 };
-var _hoisted_31 = {
-  "class": "font-normal mt-2 md:hidden"
+var _hoisted_36 = {
+  "class": "md:hidden"
 };
-var _hoisted_32 = {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "font-semibold"
+}, "Notes: ", -1 /* HOISTED */);
+var _hoisted_38 = {
   "class": "text-gray-500"
 };
-var _hoisted_33 = {
-  "class": "px-4 py-2 hidden md:table-cell"
+var _hoisted_39 = {
+  "class": "px-2 py-2 hidden md:table-cell"
 };
-var _hoisted_34 = {
-  "class": "px-4 py-2"
+var _hoisted_40 = {
+  "class": "px-2 py-2"
 };
-var _hoisted_35 = ["onClick"];
-var _hoisted_36 = {
+var _hoisted_41 = ["onClick"];
+var _hoisted_42 = {
   key: 1,
   "class": "text-center"
 };
-var _hoisted_37 = {
+var _hoisted_43 = {
   "class": "w-full bg-white rounded p-4 border border-gray-200 rounded-md"
 };
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-  "class": "mb-3"
-}, "List of client journals", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_new_booking_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("new-booking-modal");
   var _component_client_journals = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-journals");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.name), 1 /* TEXT */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.email ? $props.client.email : '-'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.phone ? $props.client.phone : '-'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.address), 1 /* TEXT */), _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.postcode ? $props.client.postcode : '') + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.city ? ' ' + $props.client.city : ''), 1 /* TEXT */)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.name), 1 /* TEXT */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.email ? $props.client.email : "-"), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.phone ? $props.client.phone : "-"), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.address), 1 /* TEXT */), _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.postcode ? $props.client.postcode : "") + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.client.city ? " " + $props.client.city : ""), 1 /* TEXT */)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'btn-primary': $data.currentTab == 'bookings',
       'btn-default': $data.currentTab != 'bookings'
-    }]),
+    }, "cursor-pointer inline-block p-3 bg-gray-200 hover:text-gray-600 hover:bg-gray-100 rounded-t-lg"]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.switchTab('bookings');
     })
-  }, " Bookings ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn", {
+  }, "Bookings", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'btn-primary': $data.currentTab == 'journals',
       'btn-default': $data.currentTab != 'journals'
-    }]),
+    }, "cursor-pointer inline-block p-3 rounded-t-lg bg-gray-200 hover:text-gray-600 hover:bg-gray-100"]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.switchTab('journals');
     })
-  }, " Journals ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bookings "), $data.currentTab == 'bookings' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  }, "Journals", 2 /* CLASS */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bookings "), $data.currentTab == 'bookings' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_new_booking_modal, {
+    client: $props.client,
+    onAddedClientBooking: $options.getBookings
+  }, null, 8 /* PROPS */, ["client", "onAddedClientBooking"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "class": "form-control cursor-pointer",
     id: "bookingFilter",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -21099,17 +21228,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onChange: _cache[3] || (_cache[3] = function () {
       return $options.getBookings && $options.getBookings.apply($options, arguments);
     })
-  }, [].concat(_hoisted_27), 544 /* NEED_HYDRATION, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.bookingFilter]])]), $data.bookings && $data.bookings.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bookings, function (booking) {
+  }, [].concat(_hoisted_32), 544 /* NEED_HYDRATION, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.bookingFilter]])]), $data.bookings && $data.bookings.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bookings, function (booking) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: booking.id,
       "class": "border-b"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(booking.formatted_date) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Notes: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(booking.notes), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(booking.notes), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(booking.formatted_date) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(booking.notes), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(booking.notes), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger btn-sm",
       onClick: function onClick($event) {
         return $options.deleteBooking(booking);
       }
-    }, " Delete ", 8 /* PROPS */, _hoisted_35)])]);
-  }), 128 /* KEYED_FRAGMENT */))])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_36, "The client has no bookings."))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Journals "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_journals, {
+    }, " Delete ", 8 /* PROPS */, _hoisted_41)])]);
+  }), 128 /* KEYED_FRAGMENT */))])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_42, "The client has no bookings."))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Journals "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_journals, {
     client: $props.client,
     journals: $props.client.journals
   }, null, 8 /* PROPS */, ["client", "journals"])], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.currentTab == 'journals']])])])]);
@@ -21137,7 +21266,7 @@ var _hoisted_2 = {
   "class": "mx-auto flex justify-between items-center w-full"
 };
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "text-lg font-semibold text-gray-900 dark:text-white sm:text-xl mb-0"
+  "class": "text-lg font-semibold text-gray-900 sm:text-xl mb-0"
 }, "Clients", -1 /* HOISTED */);
 var _hoisted_4 = ["href"];
 var _hoisted_5 = {
@@ -21261,6 +21390,151 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewBookingModal.vue?vue&type=template&id=3d5001f9":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewBookingModal.vue?vue&type=template&id=3d5001f9 ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  key: 1,
+  "class": "fixed inset-0 z-50 flex items-center justify-center p-4"
+};
+var _hoisted_2 = {
+  "class": "w-full max-w-2xl max-h-full bg-white rounded-lg shadow overflow-y-auto"
+};
+var _hoisted_3 = {
+  "class": "relative bg-white rounded-lg shadow"
+};
+var _hoisted_4 = {
+  "class": "flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+};
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-xl font-semibold text-gray-900"
+}, " New booking ", -1 /* HOISTED */);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "w-3 h-3",
+  "aria-hidden": "true",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 14 14"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+})], -1 /* HOISTED */);
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "sr-only"
+}, "Close modal", -1 /* HOISTED */);
+var _hoisted_8 = [_hoisted_6, _hoisted_7];
+var _hoisted_9 = {
+  "class": "p-4 md:p-5 grid grid-cols-2 gap-4"
+};
+var _hoisted_10 = {
+  "class": "col-span-2 md:col-span-1"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "start_date",
+  "class": "block text-sm font-semibold text-gray-900"
+}, "Start time", -1 /* HOISTED */);
+var _hoisted_12 = {
+  key: 0,
+  "class": "text-red-600"
+};
+var _hoisted_13 = {
+  "class": "col-span-2 md:col-span-1"
+};
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "end_date",
+  "class": "block text-sm font-semibold text-gray-900"
+}, "End time", -1 /* HOISTED */);
+var _hoisted_15 = {
+  key: 0,
+  "class": "text-red-600"
+};
+var _hoisted_16 = {
+  "class": "col-span-2"
+};
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "description",
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
+}, "Notes", -1 /* HOISTED */);
+var _hoisted_18 = {
+  key: 0,
+  "class": "text-red-600"
+};
+var _hoisted_19 = {
+  "class": "flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$data$errors, _$data$errors2, _$data$errors3;
+  var _directive_click_outside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("click-outside");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.showModal && $options.showModal.apply($options, arguments);
+    }),
+    "class": "btn btn-primary"
+  }, "+ New Booking"), $data.isShowModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.closeModal && $options.closeModal.apply($options, arguments);
+    }),
+    "class": "fixed inset-0 z-40 bg-gray-900 bg-opacity-50"
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.closeModal && $options.closeModal.apply($options, arguments);
+    }),
+    "class": "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+  }, [].concat(_hoisted_8))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "datetime-local",
+    id: "start_date",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.booking.start = $event;
+    }),
+    "class": "rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5",
+    required: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.booking.start]]), (_$data$errors = $data.errors) !== null && _$data$errors !== void 0 && _$data$errors.start ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.start[0]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "datetime-local",
+    id: "end_date",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.booking.end = $event;
+    }),
+    "class": "rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5",
+    required: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.booking.end]]), (_$data$errors2 = $data.errors) !== null && _$data$errors2 !== void 0 && _$data$errors2.end ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.end[0]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    id: "notes",
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $data.booking.notes = $event;
+    }),
+    rows: "4",
+    "class": "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500",
+    placeholder: "Write your notes here"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.booking.notes]]), (_$data$errors3 = $data.errors) !== null && _$data$errors3 !== void 0 && _$data$errors3.notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.notes[0]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[6] || (_cache[6] = function () {
+      return $options.storeBooking && $options.storeBooking.apply($options, arguments);
+    }),
+    "class": "btn btn-primary mr-2"
+  }, " Add booking "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[7] || (_cache[7] = function () {
+      return $options.closeModal && $options.closeModal.apply($options, arguments);
+    }),
+    "class": "btn btn-default rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100"
+  }, " Close ")])])])), [[_directive_click_outside, $options.closeModal]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewJournalModal.vue?vue&type=template&id=76f134db":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewJournalModal.vue?vue&type=template&id=76f134db ***!
@@ -21315,7 +21589,7 @@ var _hoisted_10 = {
 };
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "date",
-  "class": "block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Select time", -1 /* HOISTED */);
 var _hoisted_12 = {
   key: 0,
@@ -21326,7 +21600,7 @@ var _hoisted_13 = {
 };
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "description",
-  "class": "block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
 }, "Select time", -1 /* HOISTED */);
 var _hoisted_15 = {
   key: 0,
@@ -21342,15 +21616,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.showModal && $options.showModal.apply($options, arguments);
     }),
-    "class": "block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center",
-    type: "button"
-  }, " New journal entry "), $data.isShowModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    "class": "btn btn-primary"
+  }, "+ New Journal Entry"), $data.isShowModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.closeModal && $options.closeModal.apply($options, arguments);
     }),
     "class": "fixed inset-0 z-40 bg-gray-900 bg-opacity-50"
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Prevents propagation of click events beyond this element "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.isShowModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.closeModal && $options.closeModal.apply($options, arguments);
@@ -21376,14 +21649,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.storeJournal && $options.storeJournal.apply($options, arguments);
     }),
-    type: "button",
-    "class": "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+    "class": "btn btn-primary mr-2"
   }, " Add entry "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     onClick: _cache[6] || (_cache[6] = function () {
       return $options.closeModal && $options.closeModal.apply($options, arguments);
     }),
-    "class": "ml-2 py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+    "class": "btn btn-default rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100"
   }, " Close ")])])])), [[_directive_click_outside, $options.closeModal]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
@@ -21416,7 +21688,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
   "class": "text-xl font-semibold text-gray-900 mb-0"
-}, " Viewin Journal ", -1 /* HOISTED */);
+}, " Viewing Journal ", -1 /* HOISTED */);
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "w-3 h-3",
   "aria-hidden": "true",
@@ -21442,15 +21714,15 @@ var _hoisted_10 = {
 };
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "date",
-  "class": "block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
-}, "Select time", -1 /* HOISTED */);
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
+}, "Time", -1 /* HOISTED */);
 var _hoisted_12 = {
   "class": "col-span-2"
 };
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "description",
-  "class": "block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
-}, "Select time", -1 /* HOISTED */);
+  "class": "block mb-2 text-sm font-semibold text-gray-900"
+}, "Content", -1 /* HOISTED */);
 var _hoisted_14 = {
   "class": "flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
 };
@@ -21472,7 +21744,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.closeModal && $options.closeModal.apply($options, arguments);
     }),
-    "class": "ml-2 py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+    "class": "mr-2 btn btn-default rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100"
   }, " Close ")])])])), [[_directive_click_outside, $options.closeModal]])])]);
 }
 
@@ -21497,7 +21769,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ClientShow_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ClientShow.vue */ "./resources/js/components/ClientShow.vue");
 /* harmony import */ var _components_ClientJournals_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ClientJournals.vue */ "./resources/js/components/ClientJournals.vue");
 /* harmony import */ var _components_NewJournalModal_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/NewJournalModal.vue */ "./resources/js/components/NewJournalModal.vue");
-/* harmony import */ var _components_ViewJournalModal_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ViewJournalModal.vue */ "./resources/js/components/ViewJournalModal.vue");
+/* harmony import */ var _components_NewBookingModal_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/NewBookingModal.vue */ "./resources/js/components/NewBookingModal.vue");
+/* harmony import */ var _components_ViewJournalModal_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/ViewJournalModal.vue */ "./resources/js/components/ViewJournalModal.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -21539,13 +21812,15 @@ app.use(_vendor_tightenco_ziggy__WEBPACK_IMPORTED_MODULE_0__.ZiggyVue);
 
 
 
+
 app.component('example-component', _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 app.component('clients-list', _components_ClientsList_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.component('client-form', _components_ClientForm_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 app.component('client-show', _components_ClientShow_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 app.component('client-journals', _components_ClientJournals_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 app.component('new-journal-modal', _components_NewJournalModal_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
-app.component('view-journal-modal', _components_ViewJournalModal_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
+app.component('view-journal-modal', _components_ViewJournalModal_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
+app.component('new-booking-modal', _components_NewBookingModal_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 app.mount('#app');
 
 /***/ }),
@@ -56987,6 +57262,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/NewBookingModal.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/NewBookingModal.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _NewBookingModal_vue_vue_type_template_id_3d5001f9__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewBookingModal.vue?vue&type=template&id=3d5001f9 */ "./resources/js/components/NewBookingModal.vue?vue&type=template&id=3d5001f9");
+/* harmony import */ var _NewBookingModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewBookingModal.vue?vue&type=script&lang=js */ "./resources/js/components/NewBookingModal.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_NewBookingModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_NewBookingModal_vue_vue_type_template_id_3d5001f9__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/NewBookingModal.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/NewJournalModal.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/NewJournalModal.vue ***!
@@ -57123,6 +57426,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/NewBookingModal.vue?vue&type=script&lang=js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/NewBookingModal.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewBookingModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewBookingModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./NewBookingModal.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewBookingModal.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/NewJournalModal.vue?vue&type=script&lang=js":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/NewJournalModal.vue?vue&type=script&lang=js ***!
@@ -57231,6 +57550,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ExampleComponent_vue_vue_type_template_id_299e239e__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ExampleComponent_vue_vue_type_template_id_299e239e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ExampleComponent.vue?vue&type=template&id=299e239e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/NewBookingModal.vue?vue&type=template&id=3d5001f9":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/NewBookingModal.vue?vue&type=template&id=3d5001f9 ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewBookingModal_vue_vue_type_template_id_3d5001f9__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewBookingModal_vue_vue_type_template_id_3d5001f9__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./NewBookingModal.vue?vue&type=template&id=3d5001f9 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NewBookingModal.vue?vue&type=template&id=3d5001f9");
 
 
 /***/ }),

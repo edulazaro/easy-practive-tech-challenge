@@ -1,10 +1,14 @@
 <template>
     <div>
-       
-        <new-journal-modal
-            :client="client"
-            @added-client-journal="getJournals"
-        />
+        <div class="border-b border-gray-200 mb-6">
+            <div class="mx-auto md:flex justify-between items-center w-full">
+                <h3 class="mb-3 md:mb-0">List of client journals</h3>
+                <new-journal-modal
+                    :client="client"
+                    @added-client-journal="getJournals"
+                />
+            </div>
+        </div>
 
         <div class="w-full" v-if="selectedJournal">
             <view-journal-modal
@@ -20,9 +24,16 @@
                             class="text-xs text-gray-700 uppercase bg-gray-50"
                         >
                             <tr>
-                                <th class="px-4 py-2">Time</th>
-                                <th class="px-4 py-2">Content</th>
-                                <th class="px-4 py-2">Actions</th>
+                                <th class="px-2 py-2">
+                                    <span class="hidden lg:inline-block"
+                                        >Time</span
+                                    >
+                                    <span class="lg:hidden">Booking</span>
+                                </th>
+                                <th class="px-2 py-2 hidden lg:table-cell">
+                                    Content
+                                </th>
+                                <th class="px-2 py-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,19 +42,31 @@
                                 class="border-b"
                                 :key="journal.id"
                             >
-                                <td class="px-4 py-2">
+                                <td class="px-2 py-2">
                                     {{ journal.formatted_date }}
+                                    <div class="lg:hidden">
+                                        <span class="font-semibold"
+                                            >Content: </span
+                                        ><span class="text-gray-500">{{
+                                            journal.excerpt
+                                        }}</span>
+                                    </div>
                                 </td>
-                                <td class="px-4 py-2">{{ journal.excerpt }}</td>
-                                <td class="px-4 py-2 space-x-2">
+
+                                <td class="px-2 py-2 hidden lg:table-cell">
+                                    {{ journal.excerpt }}
+                                </td>
+                                <td
+                                    class="px-2 py-2 space-y-1 xl:space-y-0 xl:space-x-1 xl:space-x-2"
+                                >
                                     <button
-                                        class="btn btn-primary btn-sm"
+                                        class="btn btn-primary btn-sm block w-full xl:w-auto xl:inline-block"
                                         @click="selectJournal(journal)"
                                     >
                                         View
                                     </button>
                                     <button
-                                        class="btn btn-danger btn-sm"
+                                        class="btn btn-danger btn-sm block w-full xl:w-auto xl:inline-block"
                                         @click="deleteJournal(journal)"
                                     >
                                         Delete
@@ -64,7 +87,7 @@
 
 <script>
 import axios from "axios";
-import { inject } from 'vue';
+import { inject } from "vue";
 
 export default {
     name: "ClientJournals",
@@ -75,7 +98,7 @@ export default {
     },
 
     mounted() {
-        this.toast = inject('toast');
+        this.toast = inject("toast");
     },
 
     data() {
@@ -121,17 +144,17 @@ export default {
                 .delete(route("data.journals.destroy", { journal: journal.id }))
                 .then(() => {
                     this.toast.success({
-                        title: 'Success!',
-                        message: 'The journal was correctly deleted',
-                        delay: 5000
+                        title: "Success!",
+                        message: "The journal was correctly deleted",
+                        delay: 5000,
                     });
                     this.getJournals();
                 })
                 .catch((error) => {
                     this.toast.error({
-                        title: 'Success!',
-                        message: 'Failed to delete journal: ' + error.message,
-                        delay: 5000
+                        title: "Success!",
+                        message: "Failed to delete journal: " + error.message,
+                        delay: 5000,
                     });
                 });
         },

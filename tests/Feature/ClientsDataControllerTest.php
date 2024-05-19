@@ -20,6 +20,7 @@ class ClientsDataControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.store'), []);
 
         $response->assertStatus(422)
@@ -36,6 +37,7 @@ class ClientsDataControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.store'), [
                 'name' => 'Edu',
                 'email' => 'test@test',
@@ -54,6 +56,7 @@ class ClientsDataControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.store'), [
                 'name' => 'Edu',
                 'phone' => '4653asdsad',
@@ -80,6 +83,7 @@ class ClientsDataControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.store'), $clientData);
 
         $response->assertStatus(201)
@@ -121,6 +125,7 @@ class ClientsDataControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.store'), $clientData);
 
         $response->assertStatus(201)
@@ -154,6 +159,7 @@ class ClientsDataControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.store'), $clientData);
 
         $response->assertStatus(201)

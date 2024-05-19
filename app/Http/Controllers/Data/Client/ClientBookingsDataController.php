@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-
-
+use App\Models\Booking;
 use App\Models\Client;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class ClientBookingsDataController extends Controller
 {
@@ -35,7 +34,36 @@ class ClientBookingsDataController extends Controller
 
         return response()->json([
             'success' => true,
-            'collection' => $collection
+            'collection' => $collection,
         ]);
+    }
+
+    /**
+     * Stores a new booking entry for a client.
+     *
+     * @param  Client  $client  The client for whom the journal is created.
+     */
+    public function store(Client $client): JsonResponse
+    {
+        Gate::authorize('manage-client', $client);
+
+        $this->validate(request(), [
+            'start' => 'required|date_format:Y-m-d\TH:i',
+            'end' => 'required|date_format:Y-m-d\TH:i|after:start',
+            'notes' => 'nullable',
+        ]);
+
+        $booking = new Booking();
+        $booking->client_id = $client->id;
+        $booking->start = request()->get('start');
+        $booking->end = request()->get('end');
+        $booking->notes = strip_tags(request()->get('notes'));
+        $booking->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'The booking was successfully created.',
+            'data' => $booking,
+        ], 201);
     }
 }

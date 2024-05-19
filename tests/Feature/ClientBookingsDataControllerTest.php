@@ -25,6 +25,7 @@ class ClientBookingsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.bookings.index', [
                 'client' => $client->id,
             ]));
@@ -47,6 +48,7 @@ class ClientBookingsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.bookings.index', [
                 'client' => $client->id,
             ]));
@@ -55,7 +57,7 @@ class ClientBookingsDataControllerTest extends TestCase
 
         $response->assertJsonFragment([
             'success' => true,
-            'collection' => $bookings->toArray()
+            'collection' => $bookings->toArray(),
         ]);
     }
 
@@ -82,6 +84,7 @@ class ClientBookingsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.bookings.index', [
                 'client' => $client->id,
                 'when' => 'past',
@@ -99,7 +102,7 @@ class ClientBookingsDataControllerTest extends TestCase
             $response->assertJsonFragment([
                 'id' => $booking->id,
                 'start' => $booking->start->format('Y-m-d H:i:s'),
-                'client_id' => $client->id
+                'client_id' => $client->id,
             ]);
         }
     }
@@ -127,6 +130,7 @@ class ClientBookingsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.bookings.index', [
                 'client' => $client->id,
                 'when' => 'future',
@@ -142,14 +146,14 @@ class ClientBookingsDataControllerTest extends TestCase
 
         $response->assertJsonFragment([
             'success' => true,
-            'collection' => $futureBookings->toArray()
+            'collection' => $futureBookings->toArray(),
         ]);
 
         foreach ($futureBookings as $booking) {
             $response->assertJsonFragment([
                 'id' => $booking->id,
                 'start' => $booking->start->format('Y-m-d H:i:s'),
-                'client_id' => $client->id
+                'client_id' => $client->id,
             ]);
         }
     }
@@ -177,6 +181,7 @@ class ClientBookingsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.bookings.index', [
                 'client' => $client->id,
             ]));

@@ -16,7 +16,12 @@
                         width="1em"
                         xmlns="http://www.w3.org/2000/svg"
                     >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                        ></path>
                     </svg>
                     <span class="inline">{{ client.name }}</span>
                 </h1>
@@ -31,68 +36,85 @@
                     <h2>Client Info</h2>
 
                     <div class="flex items-center mb-2 text-sm">
-                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                        <div
+                            class="block ms-2 font-semibold text-gray-600 pr-3"
+                        >
                             Name
                         </div>
                         <div>{{ client.name }}</div>
                     </div>
                     <div class="flex items-center mb-2 text-sm text-sm">
-                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                        <div
+                            class="block ms-2 font-semibold text-gray-600 pr-3"
+                        >
                             Email
                         </div>
-                        <div>{{ client.email ? client.email : '-' }}</div>
+                        <div>{{ client.email ? client.email : "-" }}</div>
                     </div>
                     <div class="flex items-center mb-2 text-sm">
-                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                        <div
+                            class="block ms-2 font-semibold text-gray-600 pr-3"
+                        >
                             Phone
                         </div>
-                        <div>{{ client.phone ? client.phone : '-'  }}</div>
+                        <div>{{ client.phone ? client.phone : "-" }}</div>
                     </div>
                     <div class="flex items-center mb-2 text-sm">
-                        <div class="block ms-2 font-semibold text-gray-600 pr-3">
+                        <div
+                            class="block ms-2 font-semibold text-gray-600 pr-3"
+                        >
                             Address
                         </div>
                         <div>
-                            <span >{{ client.address }}<br/></span>
-        
-                            {{ client.postcode ? client.postcode : '' }}
-                            {{ client.city ? (' ' + client.city) : '' }}
+                            <span>{{ client.address }}<br /></span>
+
+                            {{ client.postcode ? client.postcode : "" }}
+                            {{ client.city ? " " + client.city : "" }}
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="md:col-span-2">
-                <div>
-                    <button
-                        class="btn"
-                        :class="{
-                            'btn-primary': currentTab == 'bookings',
-                            'btn-default': currentTab != 'bookings',
-                        }"
-                        @click="switchTab('bookings')"
-                    >
-                        Bookings
-                    </button>
-                    <button
-                        class="btn"
-                        :class="{
-                            'btn-primary': currentTab == 'journals',
-                            'btn-default': currentTab != 'journals',
-                        }"
-                        @click="switchTab('journals')"
-                    >
-                        Journals
-                    </button>
-                </div>
-
+                <ul
+                    class="flex flex-wrap text-sm text-center text-gray-500 border-b border-gray-200 pb-0 space-x-1"
+                >
+                    <li class="me-4">
+                        <span
+                            :class="{
+                                'btn-primary': currentTab == 'bookings',
+                                'btn-default': currentTab != 'bookings',
+                            }"
+                            class="cursor-pointer inline-block p-3 bg-gray-200 hover:text-gray-600 hover:bg-gray-100 rounded-t-lg"
+                            @click="switchTab('bookings')"
+                            >Bookings</span
+                        >
+                    </li>
+                    <li class="me-4">
+                        <span
+                            :class="{
+                                'btn-primary': currentTab == 'journals',
+                                'btn-default': currentTab != 'journals',
+                            }"
+                            class="cursor-pointer inline-block p-3 rounded-t-lg bg-gray-200 hover:text-gray-600 hover:bg-gray-100"
+                            @click="switchTab('journals')"
+                            >Journals</span
+                        >
+                    </li>
+                </ul>
                 <!-- Bookings -->
                 <div
-                class="w-full bg-white rounded p-4 border border-gray-200 rounded-md"
+                    class="w-full bg-white rounded p-4 border border-gray-200 rounded-md"
                     v-if="currentTab == 'bookings'"
                 >
-                    <h3 class="mb-3">List of client bookings</h3>
-
+                    <div class="border-b border-gray-200 mb-6">
+                        <div class="mx-auto md:flex justify-between items-center w-full">
+                            <h3 class="mb-3 md:mb-0">List of client bookings</h3>
+                            <new-booking-modal
+                                :client="client"
+                                @added-client-booking="getBookings"
+                            />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="bookingFilter">Filter Bookings:</label>
                         <select
@@ -113,11 +135,14 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50"
                             >
                                 <tr>
-                                    <th class="px-4 py-2">Time</th>
-                                    <th class="px-4 py-2 hidden md:table-cell">
+                                    <th class="px-2 py-2">
+                                        <span class="hidden md:inline-block">Time</span>
+                                        <span class="md:hidden">Booking</span>
+                                    </th>
+                                    <th class="px-2 py-2 hidden md:table-cell">
                                         Notes
                                     </th>
-                                    <th class="px-4 py-2">Actions</th>
+                                    <th class="px-2 py-2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,19 +151,20 @@
                                     :key="booking.id"
                                     class="border-b"
                                 >
-                                    <td class="px-4 py-2">
+                                    <td class="px-2 py-2">
                                         {{ booking.formatted_date }}
-                                        <div class="font-normal mt-2 md:hidden">
-                                            Notes:
-                                            <span class="text-gray-500">{{
+                                        <div class="md:hidden">
+                                            <span class="font-semibold"
+                                                >Notes: </span
+                                            ><span class="text-gray-500">{{
                                                 booking.notes
                                             }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-4 py-2 hidden md:table-cell">
+                                    <td class="px-2 py-2 hidden md:table-cell">
                                         {{ booking.notes }}
                                     </td>
-                                    <td class="px-4 py-2">
+                                    <td class="px-2 py-2">
                                         <button
                                             class="btn btn-danger btn-sm"
                                             @click="deleteBooking(booking)"
@@ -161,7 +187,6 @@
                     class="w-full bg-white rounded p-4 border border-gray-200 rounded-md"
                     v-show="currentTab == 'journals'"
                 >
-                    <h3 class="mb-3">List of client journals</h3>
                     <client-journals
                         :client="client"
                         :journals="client.journals"
@@ -174,7 +199,7 @@
 
 <script>
 import axios from "axios";
-import { inject } from 'vue';
+import { inject } from "vue";
 
 export default {
     name: "ClientShow",
@@ -182,7 +207,7 @@ export default {
     props: ["client"],
 
     mounted() {
-        this.toast = inject('toast');
+        this.toast = inject("toast");
     },
 
     data() {
@@ -225,9 +250,9 @@ export default {
             );
 
             this.toast.success({
-                title: 'Success!',
-                message: 'The booking was correctly deleted',
-                delay: 5000
+                title: "Success!",
+                message: "The booking was correctly deleted",
+                delay: 5000,
             });
 
             this.getBookings();

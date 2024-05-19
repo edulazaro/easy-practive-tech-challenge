@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-
+use App\Models\Client;
 use App\Rules\EmailWithTLDRule;
 use App\Rules\PhoneRule;
-use App\Models\Client;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientsDataController extends Controller
 {

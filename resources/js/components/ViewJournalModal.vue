@@ -1,21 +1,22 @@
 <template>
     <div>
-        <div @click="closeModal" class="fixed inset-0 z-40 bg-gray-900 bg-opacity-50"></div>
-        
+        <div
+            @click="closeModal"
+            class="fixed inset-0 z-40 bg-gray-900 bg-opacity-50"
+        ></div>
+
         <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
             <!-- Prevents propagation of click events beyond this element -->
-            <div   v-click-outside="closeModal" class="w-full max-w-2xl max-h-full bg-white rounded-lg shadow overflow-y-auto">
-
-                <div
-                    class="relative bg-white rounded-lg shadow"
-                >
+            <div
+                v-click-outside="closeModal"
+                class="w-full max-w-2xl max-h-full bg-white rounded-lg shadow overflow-y-auto"
+            >
+                <div class="relative bg-white rounded-lg shadow">
                     <div
                         class="flex items-center justify-between p-4 border-b rounded-t"
                     >
-                        <h3
-                            class="text-xl font-semibold text-gray-900 mb-0"
-                        >
-                            Viewin Journal
+                        <h3 class="text-xl font-semibold text-gray-900 mb-0">
+                            Viewing Journal
                         </h3>
                         <button
                             type="button"
@@ -42,11 +43,19 @@
                     </div>
                     <div class="p-4 md:p-5 space-y-4">
                         <div class="col-span-2">
-                            <label for="date" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Select time</label>
+                            <label
+                                for="date"
+                                class="block mb-2 text-sm font-semibold text-gray-900"
+                                >Time</label
+                            >
                             {{ journal.date }}
                         </div>
                         <div class="col-span-2">
-                            <label for="description" class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Select time</label>
+                            <label
+                                for="description"
+                                class="block mb-2 text-sm font-semibold text-gray-900"
+                                >Content</label
+                            >
                             {{ journal.content }}
                         </div>
                     </div>
@@ -56,7 +65,7 @@
                         <button
                             type="button"
                             @click="closeModal"
-                            class="ml-2 py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+                            class="mr-2 btn btn-default rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100"
                         >
                             Close
                         </button>
@@ -68,11 +77,10 @@
 </template>
 
 <script>
-
 export default {
     name: "ViewJournalModal",
 
-    props: ['client', 'journal'],
+    props: ["client", "journal"],
 
     data() {
         return {
@@ -83,7 +91,7 @@ export default {
     methods: {
         closeModal() {
             this.isShowModal = false;
-            this.$emit('unselect-client-journal');
+            this.$emit("unselect-client-journal");
         },
         showModal() {
             this.isShowModal = true;

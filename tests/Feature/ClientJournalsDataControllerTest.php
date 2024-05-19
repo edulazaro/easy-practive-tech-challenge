@@ -25,6 +25,7 @@ class ClientJournalsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.journals.index', [
                 'client' => $client->id,
             ]));
@@ -47,15 +48,16 @@ class ClientJournalsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->getJson(route('data.clients.journals.index', [
                 'client' => $client->id,
             ]));
 
         $response->assertStatus(200);
 
-        $response->assertJsonFragment ([
+        $response->assertJsonFragment([
             'success' => true,
-            'collection' => $journals->toArray() 
+            'collection' => $journals->toArray(),
         ]);
     }
 
@@ -70,6 +72,7 @@ class ClientJournalsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(route('data.clients.journals.store', $client), []);
 
         $response->assertStatus(422);
@@ -92,6 +95,7 @@ class ClientJournalsDataControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->postJson(
                 route('data.clients.journals.store', $client),
                 $journalData

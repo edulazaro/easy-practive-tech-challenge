@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-
 use App\Models\Journal;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class JournalsDataController extends Controller
 {
@@ -17,7 +16,6 @@ class JournalsDataController extends Controller
      */
     public function destroy(Journal $journal): JsonResponse
     {
-        abort(400, 'asdas dsa');
         Gate::authorize('manage-client', $journal->client);
 
         $journal->delete();

@@ -78,7 +78,7 @@
             </div>
         </nav>
 
-        <div class="items-center justify-center">
+        <main class="items-center justify-center">
             @yield('content')
         </main>
     </div>

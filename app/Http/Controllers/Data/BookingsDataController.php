@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Data;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-
 use App\Models\Booking;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class BookingsDataController extends Controller
 {

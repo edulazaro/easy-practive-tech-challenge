@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="pb-3 border-b border-gray-200 mb-6">
+        <div class="py-3 border-b border-gray-200 mb-6">
             <div class="mx-auto">
                 <h1
-                    class="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl"
+                    class="text-lg font-semibold text-gray-900 sm:text-xl mb-0"
                 >
                     <span class="inline">Clients</span>
                     <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" class="inline mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2" data-testid="flowbite-breadcrumb-separator" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -13,10 +13,9 @@
                 </h1>
             </div>
         </div>
-
-        <div class="max-w-lg mx-auto">
+        <div class="w-full bg-white rounded p-4 border border-gray-200 rounded-md max-w-lg mx-auto">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name" class="block mb-2 text-sm font-semibold text-gray-900">Name</label>
                 <input
                     type="text"
                     id="name"
@@ -28,7 +27,7 @@
                 }}</span>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email" class="block mb-2 text-sm font-semibold text-gray-900">Email</label>
                 <input
                     type="text"
                     id="email"
@@ -40,7 +39,7 @@
                 }}</span>
             </div>
             <div class="form-group">
-                <label for="phone">Phone</label>
+                <label for="phone" class="block mb-2 text-sm font-semibold text-gray-900">Phone</label>
                 <input
                     type="text"
                     id="phone"
@@ -52,7 +51,7 @@
                 }}</span>
             </div>
             <div class="form-group">
-                <label for="name">Address</label>
+                <label for="name" class="block mb-2 text-sm font-semibold text-gray-900">Address</label>
                 <input
                     type="text"
                     id="address"
@@ -60,9 +59,9 @@
                     v-model="client.address"
                 />
             </div>
-            <div class="flex">
+            <div class="block lg:flex lg:space-x-4">
                 <div class="form-group flex-1">
-                    <label for="city">City</label>
+                    <label for="city" class="block mb-2 text-sm font-semibold text-gray-900">City</label>
                     <input
                         type="text"
                         id="city"
@@ -71,7 +70,7 @@
                     />
                 </div>
                 <div class="form-group flex-1">
-                    <label for="postcode">Postcode</label>
+                    <label for="postcode" class="block mb-2 text-sm font-semibold text-gray-900">Postcode</label>
                     <input
                         type="text"
                         id="postcode"
@@ -80,9 +79,13 @@
                     />
                 </div>
             </div>
-
             <div class="text-right">
-                <a href="/clients" class="btn btn-default">Cancel</a>
+                <a
+                    :href="route('clients.index')"
+                    class="mr-2 btn btn-default rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100"
+                >
+                    Cancel
+                </a>
                 <button @click="storeClient" class="btn btn-primary">
                     Create
                 </button>

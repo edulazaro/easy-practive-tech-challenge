@@ -39,6 +39,7 @@ import ClientForm from './components/ClientForm.vue';
 import ClientShow from './components/ClientShow.vue';
 import ClientJournals from './components/ClientJournals.vue';
 import NewJournalModal from './components/NewJournalModal.vue';
+import NewBookingModal from './components/NewBookingModal.vue';
 import ViewJournalModal from './components/ViewJournalModal.vue';
 
 app.component('example-component', ExampleComponent);
@@ -48,6 +49,6 @@ app.component('client-show', ClientShow);
 app.component('client-journals', ClientJournals);
 app.component('new-journal-modal', NewJournalModal);
 app.component('view-journal-modal', ViewJournalModal);
-
+app.component('new-booking-modal', NewBookingModal);
 
 app.mount('#app');

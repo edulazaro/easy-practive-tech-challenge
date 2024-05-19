@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Data\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\JsonResponse;
-
 use App\Models\Client;
 use App\Models\Journal;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class ClientJournalsDataController extends Controller
 {
@@ -24,7 +23,7 @@ class ClientJournalsDataController extends Controller
 
         return response()->json([
             'success' => true,
-            'collection' => $collection
+            'collection' => $collection,
         ]);
     }
 

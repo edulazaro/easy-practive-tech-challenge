@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
-
-use App\Models\Client;
 
 class ClientsController extends Controller
 {

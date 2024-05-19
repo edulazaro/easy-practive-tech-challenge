@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
 
         if (
             $request->expectsJson() &&
-            !$exception instanceof ValidationException
+            ! $exception instanceof ValidationException
         ) {
             if ($exception instanceof ModelNotFoundException) {
                 return response()->json([

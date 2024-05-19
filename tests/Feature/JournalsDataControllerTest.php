@@ -25,6 +25,7 @@ class JournalsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->deleteJson(route('data.journals.destroy', $journal));
 
         $response->assertStatus(403);
@@ -46,6 +47,7 @@ class JournalsDataControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
+            ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
             ->deleteJson(route('data.journals.destroy', $journal));
 
         $response->assertStatus(200)

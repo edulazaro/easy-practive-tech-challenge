@@ -28,7 +28,7 @@ class EmailWithTLDRule implements Rule
      */
     public function message()
     {
-        return 'The :attribute must be a valid email address with ' .
+        return 'The :attribute must be a valid email address with '.
             'a top-level domain.';
     }
 }

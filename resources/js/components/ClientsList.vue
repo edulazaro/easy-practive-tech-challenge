@@ -2,7 +2,7 @@
     <div>
         <div class="py-3 border-b border-gray-200 mb-6">
             <div class="mx-auto flex justify-between items-center w-full">
-                <h1 class="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl mb-0">Clients</h1>
+                <h1 class="text-lg font-semibold text-gray-900 sm:text-xl mb-0">Clients</h1>
                 <a :href="route('clients.create')" class="btn btn-primary">+ New Client</a>
             </div>
         </div>
