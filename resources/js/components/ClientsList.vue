@@ -3,7 +3,7 @@
         <div class="pb-3 border-b border-gray-200 mb-6">
             <div class="mx-auto flex justify-between items-center w-full">
                 <h1 class="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl">Clients</h1>
-                <a href="/clients/create" class="btn btn-primary">+ New Client</a>
+                <a :href="route('clients.create')" class="btn btn-primary">+ New Client</a>
             </div>
         </div>
 

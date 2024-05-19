@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 
+import { ZiggyVue  } from '../../vendor/tightenco/ziggy';
 import { createApp } from 'vue';
 
 /**
@@ -16,6 +17,7 @@ import { createApp } from 'vue';
 
 
 const app = createApp({});
+app.use(ZiggyVue);
 
 /**
  * The following block of code may be used to automatically register your
